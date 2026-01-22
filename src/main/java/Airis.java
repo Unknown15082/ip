@@ -1,18 +1,31 @@
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Airis {
-    public static void main(String[] args) {
-        String helloMessage = """
+    private static final String helloMessage = """
         Hello! I'm Airis! Nice to meet you!
         What can I do for you?""";
 
-        String byeMessage = """
+    private static final String byeMessage = """
         See you next time!""";
 
-        String hline = "_".repeat(30);
+    public static void main(String[] args) {
+        System.out.println(wrapMessage(helloMessage));
 
-        System.out.println(hline + "\n"
-                + helloMessage + "\n"
-                + hline + "\n"
-                + byeMessage + "\n"
-                + hline + "\n");
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            String command = input.nextLine();
+            if (command.equals("bye")) {
+                System.out.println(wrapMessage(byeMessage));
+                break;
+            } else {
+                System.out.println(wrapMessage(command));
+            }
+        }
+    }
+
+    static String wrapMessage(String msg) {
+        String hline = "_".repeat(50);
+        return hline + "\n" + msg + "\n" + hline;
     }
 }
