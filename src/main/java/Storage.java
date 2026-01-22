@@ -15,9 +15,7 @@ public class Storage {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < memory.size(); i++) {
             String item = memory.get(i);
-            str.append(i + 1);
-            str.append(": ");
-            str.append(item);
+            str.append(String.format("%d: %s", i+1, item));
             if (i < memory.size() - 1) str.append("\n");
         }
         return str.toString();
