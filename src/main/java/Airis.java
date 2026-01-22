@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Airis {
@@ -9,6 +8,8 @@ public class Airis {
     private static final String byeMessage = """
         See you next time!""";
 
+    private static final Storage storage = new Storage();
+
     public static void main(String[] args) {
         printMessage(helloMessage);
 
@@ -18,8 +19,11 @@ public class Airis {
             if (command.equals("bye")) {
                 printMessage(byeMessage);
                 break;
+            } else if (command.equals("list")) {
+                printMessage(storage.getAllAsString());
             } else {
-                printMessage(command);
+                storage.add(command);
+                printMessage("added: " + command);
             }
         }
     }
