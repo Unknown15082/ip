@@ -10,16 +10,16 @@ public class Airis {
         See you next time!""";
 
     public static void main(String[] args) {
-        System.out.println(wrapMessage(helloMessage));
+        printMessage(helloMessage);
 
         Scanner input = new Scanner(System.in);
         while (true) {
             String command = input.nextLine();
             if (command.equals("bye")) {
-                System.out.println(wrapMessage(byeMessage));
+                printMessage(byeMessage);
                 break;
             } else {
-                System.out.println(wrapMessage(command));
+                printMessage(command);
             }
         }
     }
@@ -27,5 +27,9 @@ public class Airis {
     static String wrapMessage(String msg) {
         String hline = "_".repeat(50);
         return hline + "\n" + msg + "\n" + hline;
+    }
+
+    static void printMessage(String msg) {
+        System.out.println(wrapMessage(msg));
     }
 }
