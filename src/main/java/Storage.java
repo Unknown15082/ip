@@ -11,6 +11,10 @@ public class Storage<T> {
         memory.add(item);
     }
 
+    public T get(int idx) {
+        return memory.get(idx);
+    }
+
     public String getAllAsString() {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < memory.size(); i++) {
