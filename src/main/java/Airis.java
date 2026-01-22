@@ -8,7 +8,7 @@ public class Airis {
     private static final String byeMessage = """
         See you next time!""";
 
-    private static final Storage storage = new Storage();
+    private static final Storage<Task> storage = new Storage<>();
 
     public static void main(String[] args) {
         printMessage(helloMessage);
@@ -22,7 +22,7 @@ public class Airis {
             } else if (command.equals("list")) {
                 printMessage(storage.getAllAsString());
             } else {
-                storage.add(command);
+                storage.add(new Task(command));
                 printMessage("added: " + command);
             }
         }
