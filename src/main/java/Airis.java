@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Airis {
     private static final String helloMessage = """
@@ -25,7 +26,6 @@ public class Airis {
         while (true) {
             String instruction = input.next();
             boolean quit = false;
-            int index; Task task;
 
             switch (instruction) {
                 case "bye":
@@ -35,30 +35,83 @@ public class Airis {
                 case "list":
                     printMessage(storage.getAllAsString());
                     break;
-                case "mark":
-                    index = input.nextInt();
-                    task = storage.get(index - 1);
+                case "mark": {
+                    int index = input.nextInt();
+                    Task task = storage.get(index - 1);
                     task.markAsDone();
                     printMessage(String.format(doneMessage, task));
                     break;
-                case "unmark":
-                    index = input.nextInt();
-                    task = storage.get(index - 1);
+                }
+                case "unmark": {
+                    int index = input.nextInt();
+                    Task task = storage.get(index - 1);
                     task.markAsNotDone();
                     printMessage(String.format(notDoneMessage, task));
                     break;
-                case "todo":
-                    String description = input.nextLine();
-                    description = description.trim();
-                    storage.add(new Task(description));
-                    printMessage("added: " + description);
+                }
+                case "todo": {
+                    String information = input.nextLine().trim();
+                    String[] tokens = getTokens(information);
+                    String description = String.join(" ", tokens);
+                    Task task = new Todo(description);
+                    storage.add(task);
+                    printMessage("I've added this task to your list:\n\t" + task);
                     break;
+                }
+                case "deadline": {
+                    String information = input.nextLine().trim();
+                    String[] tokens = getTokens(information);
+                    ArrayList<String> descriptionList = new ArrayList<>();
+                    ArrayList<String> dueList = new ArrayList<>();
+                    ArrayList<String> current = descriptionList;
+                    for (String token: tokens) {
+                        if (token.equals("/by")) {
+                            current = dueList;
+                        } else {
+                            current.add(token);
+                        }
+                    }
+                    String description = String.join(" ", descriptionList);
+                    String due = String.join(" ", dueList);
+                    Task task = new Deadline(description, due);
+                    storage.add(task);
+                    printMessage("I've added this task to your list:\n\t" + task);
+                    break;
+                }
+                case "event": {
+                    String information = input.nextLine().trim();
+                    String[] tokens = getTokens(information);
+                    ArrayList<String> descriptionList = new ArrayList<>();
+                    ArrayList<String> startList = new ArrayList<>();
+                    ArrayList<String> endList = new ArrayList<>();
+                    ArrayList<String> current = descriptionList;
+                    for (String token: tokens) {
+                        if (token.equals("/from")) {
+                            current = startList;
+                        } else if (token.equals("/to")) {
+                            current = endList;
+                        } else {
+                            current.add(token);
+                        }
+                    }
+                    String description = String.join(" ", descriptionList);
+                    String start = String.join(" ", startList);
+                    String end = String.join(" ", endList);
+                    Task task = new Event(description, start, end);
+                    storage.add(task);
+                    printMessage("I've added this task to your list:\n\t" + task);
+                    break;
+                }
                 default:
                     printMessage("Sorry, I don't know what this command means =(");
             }
 
             if (quit) break;
         }
+    }
+
+    static String[] getTokens(String information) {
+        return information.split("\\s+");
     }
 
     static String wrapMessage(String msg) {
