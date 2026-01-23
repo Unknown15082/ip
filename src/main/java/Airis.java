@@ -34,6 +34,7 @@ public class Airis {
                         return;
                     case "list":
                         printMessage(storage.getAllAsString());
+                        input.nextLine(); // Consume current line
                         break;
                     case "mark": {
                         handleMark(input);
@@ -44,12 +45,7 @@ public class Airis {
                         break;
                     }
                     case "todo": {
-                        String information = input.nextLine().trim();
-                        String[] tokens = getTokens(information);
-                        String description = String.join(" ", tokens);
-                        Task task = new Todo(description);
-                        storage.add(task);
-                        printMessage("I've added this task to your list:\n\t" + task);
+                        handleTodo(input);
                         break;
                     }
                     case "deadline": {
@@ -131,6 +127,18 @@ public class Airis {
             throw new AirisException("Index is out of bounds");
         }
         input.nextLine(); // Consume current line
+    }
+
+    static void handleTodo(Scanner input) throws AirisException {
+        String information = input.nextLine().trim();
+        String[] tokens = getTokens(information);
+        if (tokens.length == 0) {
+            throw new AirisException("Description of task cannot be empty");
+        }
+        String description = String.join(" ", tokens);
+        Task task = new Todo(description);
+        storage.add(task);
+        printMessage("I've added this task to your list:\n\t" + task);
     }
 
     static void quitProgram() {
