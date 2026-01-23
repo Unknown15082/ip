@@ -49,23 +49,7 @@ public class Airis {
                         break;
                     }
                     case "deadline": {
-                        String information = input.nextLine().trim();
-                        String[] tokens = getTokens(information);
-                        ArrayList<String> descriptionList = new ArrayList<>();
-                        ArrayList<String> dueList = new ArrayList<>();
-                        ArrayList<String> current = descriptionList;
-                        for (String token : tokens) {
-                            if (token.equals("/by")) {
-                                current = dueList;
-                            } else {
-                                current.add(token);
-                            }
-                        }
-                        String description = String.join(" ", descriptionList);
-                        String due = String.join(" ", dueList);
-                        Task task = new Deadline(description, due);
-                        storage.add(task);
-                        printMessage("I've added this task to your list:\n\t" + task);
+                        handleDeadline(input);
                         break;
                     }
                     case "event": {
@@ -137,6 +121,36 @@ public class Airis {
         }
         String description = String.join(" ", tokens);
         Task task = new Todo(description);
+        storage.add(task);
+        printMessage("I've added this task to your list:\n\t" + task);
+    }
+
+    static void handleDeadline(Scanner input) throws AirisException {
+        String information = input.nextLine().trim();
+        String[] tokens = getTokens(information);
+        
+        ArrayList<String> descriptionList = new ArrayList<>();
+        ArrayList<String> dueList = new ArrayList<>();
+        ArrayList<String> current = descriptionList;
+        for (String token : tokens) {
+            if (token.equals("/by")) {
+                current = dueList;
+            } else {
+                current.add(token);
+            }
+        }
+        
+        if (descriptionList.isEmpty()) {
+            throw new AirisException("Description of the task cannot be empty");
+        }
+        if (dueList.isEmpty()) {
+            throw new AirisException("Due date cannot be empty");
+        }
+        
+        String description = String.join(" ", descriptionList);
+        String due = String.join(" ", dueList);
+        
+        Task task = new Deadline(description, due);
         storage.add(task);
         printMessage("I've added this task to your list:\n\t" + task);
     }
