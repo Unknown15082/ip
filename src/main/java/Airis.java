@@ -29,8 +29,7 @@ public class Airis {
 
             switch (instruction) {
                 case "bye":
-                    printMessage(byeMessage);
-                    quit = true;
+                    quitProgram();
                     break;
                 case "list":
                     printMessage(storage.getAllAsString());
@@ -108,6 +107,11 @@ public class Airis {
 
             if (quit) break;
         }
+    }
+
+    static void quitProgram() {
+        printMessage(byeMessage);
+        System.exit(0);
     }
 
     static String[] getTokens(String information) {
