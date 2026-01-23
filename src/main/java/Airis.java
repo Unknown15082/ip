@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -25,27 +26,36 @@ public class Airis {
         Scanner input = new Scanner(System.in);
         while (true) {
             String instruction = input.next();
-            boolean quit = false;
 
             switch (instruction) {
                 case "bye":
                     quitProgram();
-                    break;
+                    return;
                 case "list":
                     printMessage(storage.getAllAsString());
                     break;
                 case "mark": {
-                    int index = input.nextInt();
-                    Task task = storage.get(index - 1);
-                    task.markAsDone();
-                    printMessage(String.format(doneMessage, task));
+                    try {
+                        int index = input.nextInt();
+                        Task task = storage.get(index - 1);
+                        task.markAsDone();
+                        printMessage(String.format(doneMessage, task));
+                    } catch (NoSuchElementException e) {
+                        printMessage("Sorry, the index given was invalid! =((");
+                    }
+                    input.nextLine(); // Consume current line
                     break;
                 }
                 case "unmark": {
-                    int index = input.nextInt();
-                    Task task = storage.get(index - 1);
-                    task.markAsNotDone();
-                    printMessage(String.format(notDoneMessage, task));
+                    try {
+                        int index = input.nextInt();
+                        Task task = storage.get(index - 1);
+                        task.markAsNotDone();
+                        printMessage(String.format(notDoneMessage, task));
+                    } catch (NoSuchElementException e) {
+                        printMessage("Sorry, the index given was invalid! =((");
+                    }
+                    input.nextLine(); // Consume current line
                     break;
                 }
                 case "todo": {
@@ -104,8 +114,6 @@ public class Airis {
                 default:
                     printMessage("Sorry, I don't know what this command means =(");
             }
-
-            if (quit) break;
         }
     }
 
