@@ -1,8 +1,21 @@
 hello
 list
+todo
 todo sleep
 deadline do homework /by Friday 4pm
+deadline
 event attend class /from Friday 12pm /to Friday 3pm
 event attend lecture /to Friday 6pm /from Friday 4pm
 list
+event
+mark 1
+unmark 1
+mark 2
+mark 3
+list
+delete 2
+list
+mark -1
+unmark -1
+mark 7
 bye

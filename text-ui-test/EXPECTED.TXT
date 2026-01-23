@@ -3,10 +3,16 @@ Hello! I'm Airis! Nice to meet you!
 What can I do for you?
 __________________________________________________
 __________________________________________________
-Sorry, I don't know what this command means =(
+Oh no, an error has occurred!
+	Sorry, I don't know what this command means :(
 __________________________________________________
 __________________________________________________
+There are 0 tasks stored:
 
+__________________________________________________
+__________________________________________________
+Oh no, an error has occurred!
+	Description of task cannot be empty
 __________________________________________________
 __________________________________________________
 I've added this task to your list:
@@ -17,6 +23,10 @@ I've added this task to your list:
 	[D][ ] do homework (by: Friday 4pm)
 __________________________________________________
 __________________________________________________
+Oh no, an error has occurred!
+	Description of the task cannot be empty
+__________________________________________________
+__________________________________________________
 I've added this task to your list:
 	[E][ ] attend class (from: Friday 12pm; by: Friday 3pm)
 __________________________________________________
@@ -25,10 +35,60 @@ I've added this task to your list:
 	[E][ ] attend lecture (from: Friday 4pm; by: Friday 6pm)
 __________________________________________________
 __________________________________________________
+There are 4 tasks stored:
 1: [T][ ] sleep
 2: [D][ ] do homework (by: Friday 4pm)
 3: [E][ ] attend class (from: Friday 12pm; by: Friday 3pm)
 4: [E][ ] attend lecture (from: Friday 4pm; by: Friday 6pm)
+__________________________________________________
+__________________________________________________
+Oh no, an error has occurred!
+	Description of the task cannot be empty
+__________________________________________________
+__________________________________________________
+I've mark this as done:
+    [T][X] sleep
+__________________________________________________
+__________________________________________________
+I've mark this as not done yet:
+    [T][ ] sleep
+__________________________________________________
+__________________________________________________
+I've mark this as done:
+    [D][X] do homework (by: Friday 4pm)
+__________________________________________________
+__________________________________________________
+I've mark this as done:
+    [E][X] attend class (from: Friday 12pm; by: Friday 3pm)
+__________________________________________________
+__________________________________________________
+There are 4 tasks stored:
+1: [T][ ] sleep
+2: [D][X] do homework (by: Friday 4pm)
+3: [E][X] attend class (from: Friday 12pm; by: Friday 3pm)
+4: [E][ ] attend lecture (from: Friday 4pm; by: Friday 6pm)
+__________________________________________________
+__________________________________________________
+I've deleted this task:
+    [D][X] do homework (by: Friday 4pm)
+__________________________________________________
+__________________________________________________
+There are 3 tasks stored:
+1: [T][ ] sleep
+2: [E][X] attend class (from: Friday 12pm; by: Friday 3pm)
+3: [E][ ] attend lecture (from: Friday 4pm; by: Friday 6pm)
+__________________________________________________
+__________________________________________________
+Oh no, an error has occurred!
+	Index is out of bounds
+__________________________________________________
+__________________________________________________
+Oh no, an error has occurred!
+	Index is out of bounds
+__________________________________________________
+__________________________________________________
+Oh no, an error has occurred!
+	Index is out of bounds
 __________________________________________________
 __________________________________________________
 See you next time!
