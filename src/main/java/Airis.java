@@ -57,7 +57,7 @@ public class Airis {
                         break;
                     }
                     default:
-                        printMessage("Sorry, I don't know what this command means =(");
+                        throw new AirisException("Sorry, I don't know what this command means :(");
                 }
             } catch (AirisException e) {
                 printMessage(e.getAirisMessage());
