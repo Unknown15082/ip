@@ -1,6 +1,4 @@
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Airis {
     private static final String helloMessage = """
@@ -94,7 +92,7 @@ public class Airis {
     }
 
     static void handleTodo(Scanner input) throws AirisException {
-        String information = input.nextLine().trim();
+        String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
         if (tokens.length == 0) {
             throw new AirisException("Description of task cannot be empty");
@@ -106,7 +104,7 @@ public class Airis {
     }
 
     static void handleDeadline(Scanner input) throws AirisException {
-        String information = input.nextLine().trim();
+        String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
 
         ArrayList<String> descriptionList = new ArrayList<>();
@@ -137,7 +135,7 @@ public class Airis {
     }
 
     static void handleEvent(Scanner input) throws AirisException {
-        String information = input.nextLine().trim();
+        String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
 
         ArrayList<String> descriptionList = new ArrayList<>();
@@ -180,7 +178,8 @@ public class Airis {
     }
 
     static String[] getTokens(String information) {
-        return information.split("\\s+");
+        String[] tokens = information.split("\\s+");
+        return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
     }
 
     static String wrapMessage(String msg) {
