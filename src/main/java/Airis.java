@@ -16,6 +16,10 @@ public class Airis {
         I've mark this as not done yet:
             %s""";
 
+    private static final String deleteMessage = """
+        I've deleted this task:
+            %s""";
+
     private static final Storage<Task> storage = new Storage<>();
 
     public static void main(String[] args) {
@@ -40,6 +44,10 @@ public class Airis {
                     }
                     case "unmark": {
                         handleUnmark(input);
+                        break;
+                    }
+                    case "delete": {
+                        handleDelete(input);
                         break;
                     }
                     case "todo": {
@@ -89,6 +97,19 @@ public class Airis {
             throw new AirisException("Index is out of bounds");
         }
         input.nextLine(); // Consume current line
+    }
+
+    static void handleDelete(Scanner input) throws AirisException {
+        try {
+            int index = input.nextInt();
+            Task task = storage.remove(index - 1);
+            printMessage(String.format(deleteMessage, task));
+        } catch (NoSuchElementException e) {
+            throw new AirisException("Index not found");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AirisException("Index is out of bounds");
+        }
+        input.nextLine();
     }
 
     static void handleTodo(Scanner input) throws AirisException {

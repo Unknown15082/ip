@@ -15,6 +15,10 @@ public class Storage<T> {
         return memory.get(idx);
     }
 
+    public T remove(int idx) {
+        return memory.remove(idx);
+    }
+
     public String getAllAsString() throws IndexOutOfBoundsException {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < memory.size(); i++) {
