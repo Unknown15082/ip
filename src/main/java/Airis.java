@@ -23,9 +23,7 @@ public class Airis {
 
         Scanner input = new Scanner(System.in);
         while (true) {
-            String command = input.nextLine();
-            String[] tokens = command.split(" ");
-            String instruction = tokens[0];
+            String instruction = input.next();
             boolean quit = false;
             int index; Task task;
 
@@ -38,23 +36,25 @@ public class Airis {
                     printMessage(storage.getAllAsString());
                     break;
                 case "mark":
-                    // TODO: Place this in a try-catch block
-                    // Since this will fail for a command such as "mark as done"
-                    index = Integer.parseInt(tokens[1]);
+                    index = input.nextInt();
                     task = storage.get(index - 1);
                     task.markAsDone();
                     printMessage(String.format(doneMessage, task));
                     break;
                 case "unmark":
-                    // TODO: Same as above
-                    index = Integer.parseInt(tokens[1]);
+                    index = input.nextInt();
                     task = storage.get(index - 1);
                     task.markAsNotDone();
                     printMessage(String.format(notDoneMessage, task));
                     break;
+                case "todo":
+                    String description = input.nextLine();
+                    description = description.trim();
+                    storage.add(new Task(description));
+                    printMessage("added: " + description);
+                    break;
                 default:
-                    storage.add(new Task(command));
-                    printMessage("added: " + command);
+                    printMessage("Sorry, I don't know what this command means =(");
             }
 
             if (quit) break;
