@@ -21,6 +21,7 @@ public class Storage<T> {
 
     public String getAllAsString() throws IndexOutOfBoundsException {
         StringBuilder str = new StringBuilder();
+        str.append(String.format("There are %d tasks stored:\n", memory.size()));
         for (int i = 0; i < memory.size(); i++) {
             T item = memory.get(i);
             str.append(String.format("%d: %s", i+1, item.toString()));
