@@ -15,7 +15,7 @@ public class Storage<T> {
         return memory.get(idx);
     }
 
-    public String getAllAsString() {
+    public String getAllAsString() throws IndexOutOfBoundsException {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < memory.size(); i++) {
             T item = memory.get(i);

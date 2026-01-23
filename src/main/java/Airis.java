@@ -27,94 +27,110 @@ public class Airis {
         while (true) {
             String instruction = input.next();
 
-            switch (instruction) {
-                case "bye":
-                    quitProgram();
-                    return;
-                case "list":
-                    printMessage(storage.getAllAsString());
-                    break;
-                case "mark": {
-                    try {
-                        int index = input.nextInt();
-                        Task task = storage.get(index - 1);
-                        task.markAsDone();
-                        printMessage(String.format(doneMessage, task));
-                    } catch (NoSuchElementException e) {
-                        printMessage("Sorry, the index given was invalid! =((");
+            try {
+                switch (instruction) {
+                    case "bye":
+                        quitProgram();
+                        return;
+                    case "list":
+                        printMessage(storage.getAllAsString());
+                        break;
+                    case "mark": {
+                        handleMark(input);
+                        break;
                     }
-                    input.nextLine(); // Consume current line
-                    break;
-                }
-                case "unmark": {
-                    try {
-                        int index = input.nextInt();
-                        Task task = storage.get(index - 1);
-                        task.markAsNotDone();
-                        printMessage(String.format(notDoneMessage, task));
-                    } catch (NoSuchElementException e) {
-                        printMessage("Sorry, the index given was invalid! =((");
+                    case "unmark": {
+                        handleUnmark(input);
+                        break;
                     }
-                    input.nextLine(); // Consume current line
-                    break;
-                }
-                case "todo": {
-                    String information = input.nextLine().trim();
-                    String[] tokens = getTokens(information);
-                    String description = String.join(" ", tokens);
-                    Task task = new Todo(description);
-                    storage.add(task);
-                    printMessage("I've added this task to your list:\n\t" + task);
-                    break;
-                }
-                case "deadline": {
-                    String information = input.nextLine().trim();
-                    String[] tokens = getTokens(information);
-                    ArrayList<String> descriptionList = new ArrayList<>();
-                    ArrayList<String> dueList = new ArrayList<>();
-                    ArrayList<String> current = descriptionList;
-                    for (String token: tokens) {
-                        if (token.equals("/by")) {
-                            current = dueList;
-                        } else {
-                            current.add(token);
+                    case "todo": {
+                        String information = input.nextLine().trim();
+                        String[] tokens = getTokens(information);
+                        String description = String.join(" ", tokens);
+                        Task task = new Todo(description);
+                        storage.add(task);
+                        printMessage("I've added this task to your list:\n\t" + task);
+                        break;
+                    }
+                    case "deadline": {
+                        String information = input.nextLine().trim();
+                        String[] tokens = getTokens(information);
+                        ArrayList<String> descriptionList = new ArrayList<>();
+                        ArrayList<String> dueList = new ArrayList<>();
+                        ArrayList<String> current = descriptionList;
+                        for (String token : tokens) {
+                            if (token.equals("/by")) {
+                                current = dueList;
+                            } else {
+                                current.add(token);
+                            }
                         }
+                        String description = String.join(" ", descriptionList);
+                        String due = String.join(" ", dueList);
+                        Task task = new Deadline(description, due);
+                        storage.add(task);
+                        printMessage("I've added this task to your list:\n\t" + task);
+                        break;
                     }
-                    String description = String.join(" ", descriptionList);
-                    String due = String.join(" ", dueList);
-                    Task task = new Deadline(description, due);
-                    storage.add(task);
-                    printMessage("I've added this task to your list:\n\t" + task);
-                    break;
-                }
-                case "event": {
-                    String information = input.nextLine().trim();
-                    String[] tokens = getTokens(information);
-                    ArrayList<String> descriptionList = new ArrayList<>();
-                    ArrayList<String> startList = new ArrayList<>();
-                    ArrayList<String> endList = new ArrayList<>();
-                    ArrayList<String> current = descriptionList;
-                    for (String token: tokens) {
-                        if (token.equals("/from")) {
-                            current = startList;
-                        } else if (token.equals("/to")) {
-                            current = endList;
-                        } else {
-                            current.add(token);
+                    case "event": {
+                        String information = input.nextLine().trim();
+                        String[] tokens = getTokens(information);
+                        ArrayList<String> descriptionList = new ArrayList<>();
+                        ArrayList<String> startList = new ArrayList<>();
+                        ArrayList<String> endList = new ArrayList<>();
+                        ArrayList<String> current = descriptionList;
+                        for (String token : tokens) {
+                            if (token.equals("/from")) {
+                                current = startList;
+                            } else if (token.equals("/to")) {
+                                current = endList;
+                            } else {
+                                current.add(token);
+                            }
                         }
+                        String description = String.join(" ", descriptionList);
+                        String start = String.join(" ", startList);
+                        String end = String.join(" ", endList);
+                        Task task = new Event(description, start, end);
+                        storage.add(task);
+                        printMessage("I've added this task to your list:\n\t" + task);
+                        break;
                     }
-                    String description = String.join(" ", descriptionList);
-                    String start = String.join(" ", startList);
-                    String end = String.join(" ", endList);
-                    Task task = new Event(description, start, end);
-                    storage.add(task);
-                    printMessage("I've added this task to your list:\n\t" + task);
-                    break;
+                    default:
+                        printMessage("Sorry, I don't know what this command means =(");
                 }
-                default:
-                    printMessage("Sorry, I don't know what this command means =(");
+            } catch (AirisException e) {
+                printMessage(e.getAirisMessage());
             }
         }
+    }
+
+    static void handleMark(Scanner input) throws AirisException {
+        try {
+            int index = input.nextInt();
+            Task task = storage.get(index - 1);
+            task.markAsDone();
+            printMessage(String.format(doneMessage, task));
+        } catch (NoSuchElementException e) {
+            throw new AirisException("Index not found");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AirisException("Index is out of bounds");
+        }
+        input.nextLine(); // Consume current line
+    }
+
+    static void handleUnmark(Scanner input) throws AirisException {
+        try {
+            int index = input.nextInt();
+            Task task = storage.get(index - 1);
+            task.markAsNotDone();
+            printMessage(String.format(notDoneMessage, task));
+        } catch (NoSuchElementException e) {
+            throw new AirisException("Index not found");
+        } catch (IndexOutOfBoundsException e) {
+            throw new AirisException("Index is out of bounds");
+        }
+        input.nextLine(); // Consume current line
     }
 
     static void quitProgram() {
