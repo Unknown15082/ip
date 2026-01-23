@@ -53,27 +53,7 @@ public class Airis {
                         break;
                     }
                     case "event": {
-                        String information = input.nextLine().trim();
-                        String[] tokens = getTokens(information);
-                        ArrayList<String> descriptionList = new ArrayList<>();
-                        ArrayList<String> startList = new ArrayList<>();
-                        ArrayList<String> endList = new ArrayList<>();
-                        ArrayList<String> current = descriptionList;
-                        for (String token : tokens) {
-                            if (token.equals("/from")) {
-                                current = startList;
-                            } else if (token.equals("/to")) {
-                                current = endList;
-                            } else {
-                                current.add(token);
-                            }
-                        }
-                        String description = String.join(" ", descriptionList);
-                        String start = String.join(" ", startList);
-                        String end = String.join(" ", endList);
-                        Task task = new Event(description, start, end);
-                        storage.add(task);
-                        printMessage("I've added this task to your list:\n\t" + task);
+                        handleEvent(input);
                         break;
                     }
                     default:
@@ -128,10 +108,11 @@ public class Airis {
     static void handleDeadline(Scanner input) throws AirisException {
         String information = input.nextLine().trim();
         String[] tokens = getTokens(information);
-        
+
         ArrayList<String> descriptionList = new ArrayList<>();
         ArrayList<String> dueList = new ArrayList<>();
         ArrayList<String> current = descriptionList;
+
         for (String token : tokens) {
             if (token.equals("/by")) {
                 current = dueList;
@@ -144,13 +125,51 @@ public class Airis {
             throw new AirisException("Description of the task cannot be empty");
         }
         if (dueList.isEmpty()) {
-            throw new AirisException("Due date cannot be empty");
+            throw new AirisException("Due date of the deadline cannot be empty");
         }
         
         String description = String.join(" ", descriptionList);
         String due = String.join(" ", dueList);
         
         Task task = new Deadline(description, due);
+        storage.add(task);
+        printMessage("I've added this task to your list:\n\t" + task);
+    }
+
+    static void handleEvent(Scanner input) throws AirisException {
+        String information = input.nextLine().trim();
+        String[] tokens = getTokens(information);
+
+        ArrayList<String> descriptionList = new ArrayList<>();
+        ArrayList<String> startList = new ArrayList<>();
+        ArrayList<String> endList = new ArrayList<>();
+        ArrayList<String> current = descriptionList;
+
+        for (String token : tokens) {
+            if (token.equals("/from")) {
+                current = startList;
+            } else if (token.equals("/to")) {
+                current = endList;
+            } else {
+                current.add(token);
+            }
+        }
+
+        if (descriptionList.isEmpty()) {
+            throw new AirisException("Description of the task cannot be empty");
+        }
+        if (startList.isEmpty()) {
+            throw new AirisException("Start time of the event cannot be empty");
+        }
+        if (endList.isEmpty()) {
+            throw new AirisException("End time of the event cannot be empty");
+        }
+
+        String description = String.join(" ", descriptionList);
+        String start = String.join(" ", startList);
+        String end = String.join(" ", endList);
+
+        Task task = new Event(description, start, end);
         storage.add(task);
         printMessage("I've added this task to your list:\n\t" + task);
     }
