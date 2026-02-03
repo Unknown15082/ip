@@ -1,3 +1,5 @@
+package airis;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -33,6 +35,6 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveData() {
-        return String.format("D|%s|%s", super.toSaveData(), this.due);
+        return String.format("D|%s|%s", super.toSaveData(), this.due.format(humanFormat));
     }
 }

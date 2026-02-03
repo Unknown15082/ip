@@ -1,3 +1,5 @@
+package airis;
+
 import java.util.*;
 
 public class Airis {
