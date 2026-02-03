@@ -1,3 +1,5 @@
+package airis;
+
 public class TextUI implements UI {
     public TextUI() {}
 

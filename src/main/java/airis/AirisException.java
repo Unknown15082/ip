@@ -1,3 +1,5 @@
+package airis;
+
 public class AirisException extends Exception {
     public AirisException(String description) {
         super(description);

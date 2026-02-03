@@ -1,3 +1,5 @@
+package airis;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -38,7 +40,7 @@ public class Event extends Task {
 
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", super.toSaveData(), this.startTime, this.endTime);
+        return String.format("E|%s|%s|%s", super.toSaveData(), this.startTime.format(humanFormat), this.endTime.format(humanFormat));
     }
 }
 
