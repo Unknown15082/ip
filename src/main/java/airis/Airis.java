@@ -2,6 +2,9 @@ package airis;
 
 import java.util.*;
 
+/**
+ * The main chatbot class.
+ */
 public class Airis {
     private static final String helloMessage = """
         Hello! I'm Airis! Nice to meet you!
@@ -25,6 +28,10 @@ public class Airis {
     private static final Storage storage = new Storage();
     private static final UI ui = new TextUI();
 
+    /**
+     * This is the main function
+     * @param args arguments
+     */
     public static void main(String[] args) {
         ui.display(helloMessage);
 
@@ -86,6 +93,11 @@ public class Airis {
         }
     }
 
+    /**
+     * Mark a task as completed.
+     * @param input The Scanner object
+     * @throws AirisException if element is not found
+     */
     static void handleMark(Scanner input) throws AirisException {
         try {
             int index = input.nextInt();
@@ -100,6 +112,11 @@ public class Airis {
         input.nextLine(); // Consume current line
     }
 
+    /**
+     * Mark a task as not completed
+     * @param input The Scanner object
+     * @throws AirisException if element is not found
+     */
     static void handleUnmark(Scanner input) throws AirisException {
         try {
             int index = input.nextInt();
@@ -114,6 +131,11 @@ public class Airis {
         input.nextLine(); // Consume current line
     }
 
+    /**
+     * Delete a task
+     * @param input The Scanner object
+     * @throws AirisException if element is not found
+     */
     static void handleDelete(Scanner input) throws AirisException {
         try {
             int index = input.nextInt();
@@ -127,6 +149,11 @@ public class Airis {
         input.nextLine();
     }
 
+    /**
+     * Add a to-do task type
+     * @param input The Scanner object
+     * @throws AirisException if description is empty
+     */
     static void handleTodo(Scanner input) throws AirisException {
         String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
@@ -139,6 +166,11 @@ public class Airis {
         ui.display("I've added this task to your list:\n\t" + task);
     }
 
+    /**
+     * Add a deadline task type
+     * @param input The Scanner object
+     * @throws AirisException if any field is empty
+     */
     static void handleDeadline(Scanner input) throws AirisException {
         String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
@@ -170,6 +202,11 @@ public class Airis {
         ui.display("I've added this task to your list:\n\t" + task);
     }
 
+    /**
+     * Add an event task type
+     * @param input The Scanner object
+     * @throws AirisException if any field is empty
+     */
     static void handleEvent(Scanner input) throws AirisException {
         String information = input.nextLine().strip();
         String[] tokens = getTokens(information);
@@ -208,11 +245,19 @@ public class Airis {
         ui.display("I've added this task to your list:\n\t" + task);
     }
 
+    /**
+     * Display a goodbye message, then quit the program.
+     */
     static void quitProgram() {
         ui.display(byeMessage);
         System.exit(0);
     }
 
+    /**
+     * Split the information text into tokens, separated by whitespaces
+     * @param information The information text
+     * @return The list of tokens
+     */
     static String[] getTokens(String information) {
         String[] tokens = information.split("\\s+");
         return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);

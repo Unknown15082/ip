@@ -3,6 +3,9 @@ package airis;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event task type.
+ */
 public class Event extends Task {
     private static final DateTimeFormatter humanFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
     private static final DateTimeFormatter isoFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Store a list of tasks, and perform operations on them.
+ */
 public class Storage {
     private final ArrayList<Task> memory;
 
@@ -15,18 +18,36 @@ public class Storage {
         memory = new ArrayList<>(120);
     }
 
+    /**
+     * Add a task to the storage.
+     * @param item The item to add.
+     */
     public void add(Task item) {
         memory.add(item);
     }
 
+    /**
+     * Retrieve a task from the storage.
+     * @param idx The index to retrieve.
+     * @return The item.
+     */
     public Task get(int idx) {
         return memory.get(idx);
     }
 
+    /**
+     * Remove a task from the storage.
+     * @param idx The index of the item to be removed.
+     * @return The deleted task.
+     */
     public Task remove(int idx) {
         return memory.remove(idx);
     }
 
+    /**
+     * Return a representation of all tasks inside the storage.
+     * @return A multiline string, containing the number of elements and the elements themselves.
+     */
     public String getAllAsString() {
         StringBuilder str = new StringBuilder();
         str.append(String.format("There are %d tasks stored:\n", memory.size()));
@@ -38,6 +59,10 @@ public class Storage {
         return str.toString();
     }
 
+    /**
+     * Save the storage to a local file.
+     * @throws AirisException if there are I/O errors.
+     */
     public void export() throws AirisException {
         String cwd = System.getProperty("user.dir");
         Path path = Paths.get(cwd, "data.txt");
@@ -64,6 +89,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the storage from a local file.
+     * @throws AirisException if there is an I/O error.
+     */
     public void load() throws AirisException {
         String cwd = System.getProperty("user.dir");
         Path path = Paths.get(cwd, "data.txt");

@@ -1,5 +1,8 @@
 package airis;
 
+/**
+ * The main exception class for the chatbot.
+ */
 public class AirisException extends Exception {
     public AirisException(String description) {
         super(description);
@@ -14,6 +17,10 @@ public class AirisException extends Exception {
         return String.format("[Airis] %s", super.getMessage());
     }
 
+    /**
+     * Create a chatbot-specific error message for users
+     * @return The error message
+     */
     public String getAirisMessage() {
         return String.format("Oh no, an error has occurred!" +
                 "\n\t%s", super.getMessage());
