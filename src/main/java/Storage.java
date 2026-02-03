@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -5,22 +6,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Storage<T extends Task> {
-    private final ArrayList<T> memory;
+public class Storage {
+    private final ArrayList<Task> memory;
 
     public Storage() {
         memory = new ArrayList<>(120);
     }
 
-    public void add(T item) {
+    public void add(Task item) {
         memory.add(item);
     }
 
-    public T get(int idx) {
+    public Task get(int idx) {
         return memory.get(idx);
     }
 
-    public T remove(int idx) {
+    public Task remove(int idx) {
         return memory.remove(idx);
     }
 
@@ -28,7 +29,7 @@ public class Storage<T extends Task> {
         StringBuilder str = new StringBuilder();
         str.append(String.format("There are %d tasks stored:\n", memory.size()));
         for (int i = 0; i < memory.size(); i++) {
-            T item = memory.get(i);
+            Task item = memory.get(i);
             str.append(String.format("%d: %s", i+1, item.toString()));
             if (i < memory.size() - 1) str.append("\n");
         }
@@ -49,7 +50,7 @@ public class Storage<T extends Task> {
 
         // Create file content
         ArrayList<String> contents = new ArrayList<>();
-        for (T item : memory) {
+        for (Task item : memory) {
             contents.add(item.toSaveData());
         }
 
@@ -58,6 +59,31 @@ public class Storage<T extends Task> {
             Files.write(path, contents);
         } catch (IOException e) {
             throw new AirisException(e);
+        }
+    }
+
+    public void load() throws AirisException {
+        String cwd = System.getProperty("user.dir");
+        Path path = Paths.get(cwd, "data.txt");
+
+        BufferedReader reader;
+
+        try {
+            reader = Files.newBufferedReader(path);
+        } catch (IOException e) {
+            throw new AirisException(e);
+        }
+
+        while (true) {
+            String line;
+            try {
+                line = reader.readLine();
+            } catch (IOException e) {
+                throw new AirisException(e);
+            }
+            if (line == null) break;
+
+            this.add(Task.loadTask(line));
         }
     }
 }

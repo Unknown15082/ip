@@ -20,11 +20,17 @@ public class Airis {
         I've deleted this task:
             %s""";
 
-    private static final Storage<Task> storage = new Storage<>();
+    private static final Storage storage = new Storage();
     private static final UI ui = new TextUI();
 
     public static void main(String[] args) {
         ui.display(helloMessage);
+
+        try {
+            storage.load();
+        } catch (AirisException e) {
+            ui.display(e.getAirisMessage());
+        }
 
         Scanner input = new Scanner(System.in);
         while (true) {
