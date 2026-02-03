@@ -20,10 +20,17 @@ public class Airis {
         I've deleted this task:
             %s""";
 
-    private static final Storage<Task> storage = new Storage<>();
+    private static final Storage storage = new Storage();
+    private static final UI ui = new TextUI();
 
     public static void main(String[] args) {
-        printMessage(helloMessage);
+        ui.display(helloMessage);
+
+        try {
+            storage.load();
+        } catch (AirisException e) {
+            ui.display(e.getAirisMessage());
+        }
 
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -35,38 +42,44 @@ public class Airis {
                         quitProgram();
                         return;
                     case "list":
-                        printMessage(storage.getAllAsString());
+                        ui.display(storage.getAllAsString());
                         input.nextLine(); // Consume current line
                         break;
                     case "mark": {
                         handleMark(input);
+                        storage.export();
                         break;
                     }
                     case "unmark": {
                         handleUnmark(input);
+                        storage.export();
                         break;
                     }
                     case "delete": {
                         handleDelete(input);
+                        storage.export();
                         break;
                     }
                     case "todo": {
                         handleTodo(input);
+                        storage.export();
                         break;
                     }
                     case "deadline": {
                         handleDeadline(input);
+                        storage.export();
                         break;
                     }
                     case "event": {
                         handleEvent(input);
+                        storage.export();
                         break;
                     }
                     default:
                         throw new AirisException("Sorry, I don't know what this command means :(");
                 }
             } catch (AirisException e) {
-                printMessage(e.getAirisMessage());
+                ui.display(e.getAirisMessage());
             }
         }
     }
@@ -76,7 +89,7 @@ public class Airis {
             int index = input.nextInt();
             Task task = storage.get(index - 1);
             task.markAsDone();
-            printMessage(String.format(doneMessage, task));
+            ui.display(String.format(doneMessage, task));
         } catch (NoSuchElementException e) {
             throw new AirisException("Index not found");
         } catch (IndexOutOfBoundsException e) {
@@ -90,7 +103,7 @@ public class Airis {
             int index = input.nextInt();
             Task task = storage.get(index - 1);
             task.markAsNotDone();
-            printMessage(String.format(notDoneMessage, task));
+            ui.display(String.format(notDoneMessage, task));
         } catch (NoSuchElementException e) {
             throw new AirisException("Index not found");
         } catch (IndexOutOfBoundsException e) {
@@ -103,7 +116,7 @@ public class Airis {
         try {
             int index = input.nextInt();
             Task task = storage.remove(index - 1);
-            printMessage(String.format(deleteMessage, task));
+            ui.display(String.format(deleteMessage, task));
         } catch (NoSuchElementException e) {
             throw new AirisException("Index not found");
         } catch (IndexOutOfBoundsException e) {
@@ -121,7 +134,7 @@ public class Airis {
         String description = String.join(" ", tokens);
         Task task = new Todo(description);
         storage.add(task);
-        printMessage("I've added this task to your list:\n\t" + task);
+        ui.display("I've added this task to your list:\n\t" + task);
     }
 
     static void handleDeadline(Scanner input) throws AirisException {
@@ -152,7 +165,7 @@ public class Airis {
         
         Task task = new Deadline(description, due);
         storage.add(task);
-        printMessage("I've added this task to your list:\n\t" + task);
+        ui.display("I've added this task to your list:\n\t" + task);
     }
 
     static void handleEvent(Scanner input) throws AirisException {
@@ -190,25 +203,16 @@ public class Airis {
 
         Task task = new Event(description, start, end);
         storage.add(task);
-        printMessage("I've added this task to your list:\n\t" + task);
+        ui.display("I've added this task to your list:\n\t" + task);
     }
 
     static void quitProgram() {
-        printMessage(byeMessage);
+        ui.display(byeMessage);
         System.exit(0);
     }
 
     static String[] getTokens(String information) {
         String[] tokens = information.split("\\s+");
         return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
-    }
-
-    static String wrapMessage(String msg) {
-        String hline = "_".repeat(50);
-        return hline + "\n" + msg + "\n" + hline;
-    }
-
-    static void printMessage(String msg) {
-        System.out.println(wrapMessage(msg));
     }
 }

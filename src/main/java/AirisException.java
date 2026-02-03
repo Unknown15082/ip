@@ -3,6 +3,10 @@ public class AirisException extends Exception {
         super(description);
     }
 
+    public AirisException(Exception e) {
+        super(e.getMessage());
+    }
+
     @Override
     public String toString() {
         return String.format("[Airis] %s", super.getMessage());
