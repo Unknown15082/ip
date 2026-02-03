@@ -4,7 +4,8 @@ package airis;
  * An implementation of UI, that prints to standard output.
  */
 public class TextUI implements UI {
-    public TextUI() {}
+    public TextUI() {
+    }
 
     /**
      * Wrap the message in horizontal lines.
