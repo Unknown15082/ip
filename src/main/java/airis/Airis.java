@@ -4,23 +4,23 @@ import java.util.*;
 
 public class Airis {
     private static final String helloMessage = """
-        Hello! I'm Airis! Nice to meet you!
-        What can I do for you?""";
+            Hello! I'm Airis! Nice to meet you!
+            What can I do for you?""";
 
     private static final String byeMessage = """
-        See you next time!""";
+            See you next time!""";
 
     private static final String doneMessage = """
-        I've mark this as done:
-            %s""";
+            I've mark this as done:
+                %s""";
 
     private static final String notDoneMessage = """
-        I've mark this as not done yet:
-            %s""";
+            I've mark this as not done yet:
+                %s""";
 
     private static final String deleteMessage = """
-        I've deleted this task:
-            %s""";
+            I've deleted this task:
+                %s""";
 
     private static final Storage storage = new Storage();
     private static final UI ui = new TextUI();
@@ -40,45 +40,45 @@ public class Airis {
 
             try {
                 switch (instruction) {
-                    case "bye":
-                        quitProgram();
-                        return;
-                    case "list":
-                        ui.display(storage.getAllAsString());
-                        input.nextLine(); // Consume current line
-                        break;
-                    case "mark": {
-                        handleMark(input);
-                        storage.export();
-                        break;
-                    }
-                    case "unmark": {
-                        handleUnmark(input);
-                        storage.export();
-                        break;
-                    }
-                    case "delete": {
-                        handleDelete(input);
-                        storage.export();
-                        break;
-                    }
-                    case "todo": {
-                        handleTodo(input);
-                        storage.export();
-                        break;
-                    }
-                    case "deadline": {
-                        handleDeadline(input);
-                        storage.export();
-                        break;
-                    }
-                    case "event": {
-                        handleEvent(input);
-                        storage.export();
-                        break;
-                    }
-                    default:
-                        throw new AirisException("Sorry, I don't know what this command means :(");
+                case "bye":
+                    quitProgram();
+                    return;
+                case "list":
+                    ui.display(storage.getAllAsString());
+                    input.nextLine(); // Consume current line
+                    break;
+                case "mark": {
+                    handleMark(input);
+                    storage.export();
+                    break;
+                }
+                case "unmark": {
+                    handleUnmark(input);
+                    storage.export();
+                    break;
+                }
+                case "delete": {
+                    handleDelete(input);
+                    storage.export();
+                    break;
+                }
+                case "todo": {
+                    handleTodo(input);
+                    storage.export();
+                    break;
+                }
+                case "deadline": {
+                    handleDeadline(input);
+                    storage.export();
+                    break;
+                }
+                case "event": {
+                    handleEvent(input);
+                    storage.export();
+                    break;
+                }
+                default:
+                    throw new AirisException("Sorry, I don't know what this command means :(");
                 }
             } catch (AirisException e) {
                 ui.display(e.getAirisMessage());
@@ -154,17 +154,17 @@ public class Airis {
                 current.add(token);
             }
         }
-        
+
         if (descriptionList.isEmpty()) {
             throw new AirisException("Description of the task cannot be empty");
         }
         if (dueList.isEmpty()) {
             throw new AirisException("Due date of the deadline cannot be empty");
         }
-        
+
         String description = String.join(" ", descriptionList);
         String due = String.join(" ", dueList);
-        
+
         Task task = new Deadline(description, due);
         storage.add(task);
         ui.display("I've added this task to your list:\n\t" + task);

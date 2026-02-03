@@ -32,7 +32,7 @@ public class Storage {
         str.append(String.format("There are %d tasks stored:\n", memory.size()));
         for (int i = 0; i < memory.size(); i++) {
             Task item = memory.get(i);
-            str.append(String.format("%d: %s", i+1, item.toString()));
+            str.append(String.format("%d: %s", i + 1, item.toString()));
             if (i < memory.size() - 1) str.append("\n");
         }
         return str.toString();

@@ -1,7 +1,8 @@
 package airis;
 
 public class TextUI implements UI {
-    public TextUI() {}
+    public TextUI() {
+    }
 
     private String wrapMessage(String message) {
         String hline = "_".repeat(50);
