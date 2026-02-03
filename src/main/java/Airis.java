@@ -29,7 +29,7 @@ public class Airis {
         try {
             storage.load();
         } catch (AirisException e) {
-            ui.display(e.getAirisMessage());
+            // Ignored, since in this case there is simply no data
         }
 
         Scanner input = new Scanner(System.in);

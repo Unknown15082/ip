@@ -1,17 +1,22 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private final String startTime;
-    private final String endTime;
+    private static final DateTimeFormatter humanFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter isoFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
     public Event(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = LocalDateTime.parse(startTime, humanFormat);
+        this.endTime = LocalDateTime.parse(endTime, humanFormat);
     }
 
     public Event(String description, boolean isDone, String startTime, String endTime) {
         super(description, isDone);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = LocalDateTime.parse(startTime, humanFormat);
+        this.endTime = LocalDateTime.parse(endTime, humanFormat);
     }
 
     public static Task loadTask(String data) {
@@ -26,7 +31,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s; by: %s)", super.toString(), this.startTime, this.endTime);
+        return String.format("[E]%s (from: %s; by: %s)",
+                super.toString(),
+                this.startTime.format(isoFormat), this.endTime.format(isoFormat));
     }
 
     @Override
