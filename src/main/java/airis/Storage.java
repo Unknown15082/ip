@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Storage {
     private final ArrayList<Task> memory;
@@ -32,7 +33,7 @@ public class Storage {
         str.append(String.format("There are %d tasks stored:\n", memory.size()));
         for (int i = 0; i < memory.size(); i++) {
             Task item = memory.get(i);
-            str.append(String.format("%d: %s", i+1, item.toString()));
+            str.append(String.format("%d: %s", i + 1, item.toString()));
             if (i < memory.size() - 1) str.append("\n");
         }
         return str.toString();
@@ -87,5 +88,19 @@ public class Storage {
 
             this.add(Task.loadTask(line));
         }
+    }
+
+    /**
+     * Search for all tasks with the keyword inside description.
+     * @param keyword The keyword to search for.
+     * @return An array containing all tasks that matches the keyword.
+     */
+    public Task[] search(String keyword) {
+        List<Task> filteredTasks = memory.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .toList();
+
+        Task[] taskArray = new Task[filteredTasks.size()];
+        return filteredTasks.toArray(taskArray);
     }
 }
