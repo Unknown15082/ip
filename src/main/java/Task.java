@@ -16,6 +16,10 @@ public class Task {
         return this.isDone ? "X" : " ";
     }
 
+    public String toSaveData() {
+        return String.format("%b|%s", this.isDone, this.description);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

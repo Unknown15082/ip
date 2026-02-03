@@ -41,26 +41,32 @@ public class Airis {
                         break;
                     case "mark": {
                         handleMark(input);
+                        storage.export();
                         break;
                     }
                     case "unmark": {
                         handleUnmark(input);
+                        storage.export();
                         break;
                     }
                     case "delete": {
                         handleDelete(input);
+                        storage.export();
                         break;
                     }
                     case "todo": {
                         handleTodo(input);
+                        storage.export();
                         break;
                     }
                     case "deadline": {
                         handleDeadline(input);
+                        storage.export();
                         break;
                     }
                     case "event": {
                         handleEvent(input);
+                        storage.export();
                         break;
                     }
                     default:
