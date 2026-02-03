@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private final String due;
+    private static final DateTimeFormatter humanFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter isoFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final LocalDateTime due;
 
     public Deadline(String description, String due) {
         super(description);
-        this.due = due;
+        this.due = LocalDateTime.parse(due, humanFormat);
     }
 
     public Deadline(String description, boolean isDone, String due) {
         super(description, isDone);
-        this.due = due;
+        this.due = LocalDateTime.parse(due, humanFormat);
     }
 
     public static Task loadTask(String data) {
@@ -22,7 +27,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.due);
+        return String.format("[D]%s (by: %s)",
+                super.toString(), this.due.format(isoFormat));
     }
 
     @Override
