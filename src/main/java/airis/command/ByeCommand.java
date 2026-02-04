@@ -12,6 +12,6 @@ public class ByeCommand implements Command {
 
     @Override
     public Response process() {
-        return Response.fromMessage("Goodbye!");
+        return Response.quitMessage("See you next time!");
     }
 }

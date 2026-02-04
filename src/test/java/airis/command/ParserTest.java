@@ -14,9 +14,7 @@ public class ParserTest {
 
     @BeforeAll
     public static void setUpStandardParser() {
-        parser = new Parser();
-
-        parser.register("bye", new String[]{}, ByeCommand::make);
+        parser = Parser.makeDefaultParser();
     }
 
     @Test

@@ -20,6 +20,14 @@ public class Parser {
         this.constructorList = new HashMap<>();
     }
 
+    public static Parser makeDefaultParser() {
+        Parser parser = new Parser();
+
+        parser.register("bye", new String[]{}, ByeCommand::make);
+
+        return parser;
+    }
+
     /**
      * Split the information text into tokens, separated by whitespaces
      *

@@ -1,7 +1,9 @@
 package airis.command;
 
+import airis.ui.UI;
+
 public class Response {
-    private String message;
+    private final String message;
     private boolean quitAfterRun;
 
     private Response(String message) {
@@ -17,5 +19,12 @@ public class Response {
         Response response = new Response(message);
         response.quitAfterRun = true;
         return response;
+    }
+
+    public void process(UI ui) {
+        ui.display(this.message);
+        if (this.quitAfterRun) {
+            System.exit(0);
+        }
     }
 }

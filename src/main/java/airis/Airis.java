@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import airis.command.Command;
+import airis.command.Parser;
+import airis.command.Response;
 import airis.task.Deadline;
 import airis.task.Event;
 import airis.task.Task;
@@ -35,8 +38,9 @@ public class Airis {
             I've deleted this task:
                 %s""";
 
-    private static final Storage storage = new Storage();
-    private static final UI ui = new TextUI();
+    private static Storage storage;
+    private static UI ui;
+    private static Parser parser;
 
     /**
      * This is the main function
@@ -44,66 +48,22 @@ public class Airis {
      * @param args arguments
      */
     public static void main(String[] args) {
+        storage = new Storage();
+        ui = new TextUI();
+        parser = Parser.makeDefaultParser();
+
         ui.display(helloMessage);
 
-        try {
-            storage.load();
-        } catch (AirisException e) {
-            // Ignored, since in this case there is simply no data
-        }
-
-        Scanner input = new Scanner(System.in);
+        Scanner stdin = new Scanner(System.in);
         while (true) {
-            String instruction = input.next();
-
+            String line = stdin.nextLine();
             try {
-                switch (instruction) {
-                case "bye":
-                    quitProgram();
-                    return;
-                case "list":
-                    ui.display(storage.getAllAsString());
-                    input.nextLine(); // Consume current line
-                    break;
-                case "mark": {
-                    handleMark(input);
-                    storage.export();
-                    break;
-                }
-                case "unmark": {
-                    handleUnmark(input);
-                    storage.export();
-                    break;
-                }
-                case "delete": {
-                    handleDelete(input);
-                    storage.export();
-                    break;
-                }
-                case "todo": {
-                    handleTodo(input);
-                    storage.export();
-                    break;
-                }
-                case "deadline": {
-                    handleDeadline(input);
-                    storage.export();
-                    break;
-                }
-                case "event": {
-                    handleEvent(input);
-                    storage.export();
-                    break;
-                }
-                case "find": {
-                    handleFind(input);
-                    break;
-                }
-                default:
-                    throw new AirisException("Sorry, I don't know what this command means :(");
-                }
+                Command cmd = parser.parse(line);
+                Response response = cmd.process();
+                response.process(ui);
             } catch (AirisException e) {
                 ui.display(e.getAirisMessage());
+                break;
             }
         }
     }
