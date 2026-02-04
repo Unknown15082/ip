@@ -20,6 +20,17 @@ public class Parser {
         this.constructorList = new HashMap<>();
     }
 
+    /**
+     * Split the information text into tokens, separated by whitespaces
+     *
+     * @param text The information text
+     * @return The list of tokens
+     */
+    static String[] getTokens(String text) {
+        String[] tokens = text.split("\\s+");
+        return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
+    }
+
     public void register(String name, String[] flags, Function<HashMap<String, String>, Command> constructor) {
         this.flagsList.put(name, flags);
         this.constructorList.put(name, constructor);
@@ -27,6 +38,7 @@ public class Parser {
 
     /**
      * Parse a line of text containing a command, and return the corresponding Command object.
+     *
      * @param text The space-separated text.
      * @return The Command object created from the given data.
      * @throws AirisException if command is not found or no command was given.
@@ -52,7 +64,7 @@ public class Parser {
 
         String currentFlag = "main";
         ArrayList<String> currentData = new ArrayList<>();
-        for (String token: tokens) {
+        for (String token : tokens) {
             if (flagSet.contains(token)) {
                 args.put(currentFlag, String.join(" ", currentData));
                 currentFlag = token;
@@ -63,15 +75,5 @@ public class Parser {
         args.put(currentFlag, String.join(" ", currentData));
 
         return callable.apply(args);
-    }
-
-    /**
-     * Split the information text into tokens, separated by whitespaces
-     * @param text The information text
-     * @return The list of tokens
-     */
-    static String[] getTokens(String text) {
-        String[] tokens = text.split("\\s+");
-        return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
     }
 }

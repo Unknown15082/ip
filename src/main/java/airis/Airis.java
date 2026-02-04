@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import airis.task.Deadline;
+import airis.task.Event;
+import airis.task.Task;
+import airis.task.Todo;
 import airis.ui.TextUI;
 import airis.ui.UI;
 
@@ -36,6 +40,7 @@ public class Airis {
 
     /**
      * This is the main function
+     *
      * @param args arguments
      */
     public static void main(String[] args) {
@@ -105,6 +110,7 @@ public class Airis {
 
     /**
      * Mark a task as completed.
+     *
      * @param input The Scanner object
      * @throws AirisException if element is not found
      */
@@ -124,6 +130,7 @@ public class Airis {
 
     /**
      * Mark a task as not completed
+     *
      * @param input The Scanner object
      * @throws AirisException if element is not found
      */
@@ -143,6 +150,7 @@ public class Airis {
 
     /**
      * Delete a task
+     *
      * @param input The Scanner object
      * @throws AirisException if element is not found
      */
@@ -161,6 +169,7 @@ public class Airis {
 
     /**
      * Add a to-do task type
+     *
      * @param input The Scanner object
      * @throws AirisException if description is empty
      */
@@ -178,6 +187,7 @@ public class Airis {
 
     /**
      * Add a deadline task type
+     *
      * @param input The Scanner object
      * @throws AirisException if any field is empty
      */
@@ -214,6 +224,7 @@ public class Airis {
 
     /**
      * Add an event task type
+     *
      * @param input The Scanner object
      * @throws AirisException if any field is empty
      */
@@ -281,6 +292,7 @@ public class Airis {
 
     /**
      * Split the information text into tokens, separated by whitespaces
+     *
      * @param information The information text
      * @return The list of tokens
      */

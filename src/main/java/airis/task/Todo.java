@@ -1,4 +1,4 @@
-package airis;
+package airis.task;
 
 /**
  * A to-do task type.
