@@ -11,6 +11,7 @@ import airis.command.Response;
 import airis.task.Deadline;
 import airis.task.Event;
 import airis.task.Task;
+import airis.task.TaskList;
 import airis.task.Todo;
 import airis.ui.TextUI;
 import airis.ui.UI;
@@ -40,7 +41,6 @@ public class Airis {
 
     private static Storage storage;
     private static UI ui;
-    private static Parser parser;
 
     /**
      * This is the main function
@@ -50,7 +50,8 @@ public class Airis {
     public static void main(String[] args) {
         storage = new Storage();
         ui = new TextUI();
-        parser = Parser.makeDefaultParser();
+        Parser parser = Parser.makeDefaultParser();
+        TaskList taskList = new TaskList();
 
         ui.display(helloMessage);
 
@@ -59,7 +60,7 @@ public class Airis {
             String line = stdin.nextLine();
             try {
                 Command cmd = parser.parse(line);
-                Response response = cmd.process();
+                Response response = cmd.process(taskList);
                 response.process(ui);
             } catch (AirisException e) {
                 ui.display(e.getAirisMessage());
@@ -240,14 +241,6 @@ public class Airis {
         } catch (NoSuchElementException e) {
             throw new AirisException("No keyword was found.");
         }
-    }
-
-    /**
-     * Display a goodbye message, then quit the program.
-     */
-    static void quitProgram() {
-        ui.display(byeMessage);
-        System.exit(0);
     }
 
     /**

@@ -2,6 +2,8 @@ package airis.command;
 
 import java.util.HashMap;
 
+import airis.task.TaskList;
+
 public class ByeCommand implements Command {
     private ByeCommand() {
     }
@@ -11,7 +13,7 @@ public class ByeCommand implements Command {
     }
 
     @Override
-    public Response process() {
+    public Response process(TaskList tasklist) {
         return Response.quitMessage("See you next time!");
     }
 }
