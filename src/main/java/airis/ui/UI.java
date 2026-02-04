@@ -1,4 +1,4 @@
-package airis;
+package airis.ui;
 
 /**
  * The common interface for UIs.

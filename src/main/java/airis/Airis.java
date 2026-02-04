@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import airis.ui.TextUI;
+import airis.ui.UI;
+
 /**
  * The main chatbot class.
  */

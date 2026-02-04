@@ -1,4 +1,4 @@
-package airis;
+package airis.ui;
 
 /**
  * An implementation of UI, that prints to standard output.
