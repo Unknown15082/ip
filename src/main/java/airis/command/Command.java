@@ -1,8 +1,10 @@
 package airis.command;
 
+import java.util.HashMap;
+
 /**
- * The base class for commands.
+ * The interface for all types of commands.
  */
-public abstract class Command {
-    abstract String process();
+public interface Command {
+    public Response process();
 }
