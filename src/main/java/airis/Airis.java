@@ -64,7 +64,6 @@ public class Airis {
                 response.process(ui);
             } catch (AirisException e) {
                 ui.display(e.getAirisMessage());
-                break;
             }
         }
     }

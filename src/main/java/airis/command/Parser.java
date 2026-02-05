@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.function.Function;
 
 import airis.AirisException;
 
@@ -13,7 +12,7 @@ import airis.AirisException;
  */
 public class Parser {
     private final HashMap<String, String[]> flagsList;
-    private final HashMap<String, Function<HashMap<String, String>, Command>> constructorList;
+    private final HashMap<String, CommandConstructor> constructorList;
 
     public Parser() {
         this.flagsList = new HashMap<>();
@@ -24,6 +23,7 @@ public class Parser {
         Parser parser = new Parser();
 
         parser.register("bye", new String[]{}, ByeCommand::make);
+        parser.register("todo", new String[]{}, TodoCommand::make);
 
         return parser;
     }
@@ -39,7 +39,7 @@ public class Parser {
         return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
     }
 
-    public void register(String name, String[] flags, Function<HashMap<String, String>, Command> constructor) {
+    public void register(String name, String[] flags, CommandConstructor constructor) {
         this.flagsList.put(name, flags);
         this.constructorList.put(name, constructor);
     }
@@ -65,14 +65,15 @@ public class Parser {
             throw new AirisException("Command not found");
         }
         String[] flags = flagsList.get(mainCommand);
-        Function<HashMap<String, String>, Command> callable = constructorList.get(mainCommand);
+        CommandConstructor callable = constructorList.get(mainCommand);
 
         HashSet<String> flagSet = new HashSet<>(Arrays.asList(flags));
         HashMap<String, String> args = new HashMap<>();
 
         String currentFlag = "main";
         ArrayList<String> currentData = new ArrayList<>();
-        for (String token : tokens) {
+        for (int i = 1; i < tokens.length; i++) {
+            String token = tokens[i];
             if (flagSet.contains(token)) {
                 args.put(currentFlag, String.join(" ", currentData));
                 currentFlag = token;

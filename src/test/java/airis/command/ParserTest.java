@@ -24,6 +24,12 @@ public class ParserTest {
     }
 
     @Test
+    public void testParse_todo() throws AirisException {
+        Command cmd = parser.parse("todo test");
+        assertInstanceOf(TodoCommand.class, cmd);
+    }
+
+    @Test
     public void testParse_empty() {
         assertThrows(AirisException.class,
                 () -> parser.parse(""));
