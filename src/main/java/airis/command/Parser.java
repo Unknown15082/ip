@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import airis.AirisException;
 
@@ -23,6 +24,7 @@ public class Parser {
         Parser parser = new Parser();
 
         parser.register("bye", new String[]{}, ByeCommand::make);
+        parser.register("list", new String[]{}, ListCommand::make);
         parser.register("todo", new String[]{}, TodoCommand::make);
 
         return parser;
