@@ -1,5 +1,6 @@
 package airis.command;
 
+import airis.AirisException;
 import airis.ui.UI;
 
 public class Response {
@@ -19,6 +20,15 @@ public class Response {
         Response response = new Response(message);
         response.quitAfterRun = true;
         return response;
+    }
+
+    public static Response fromException(AirisException e) {
+        return new Response(e.getAirisMessage());
+    }
+
+    public static Response fromErrorMessage(String message) {
+        AirisException e = new AirisException(message);
+        return Response.fromException(e);
     }
 
     public void process(UI ui) {

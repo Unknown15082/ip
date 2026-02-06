@@ -26,6 +26,8 @@ public class Parser {
         parser.register("bye", new String[]{}, ByeCommand::make);
         parser.register("list", new String[]{}, ListCommand::make);
         parser.register("todo", new String[]{}, TodoCommand::make);
+        parser.register("mark", new String[]{}, MarkCommand::make);
+        parser.register("unmark", new String[]{}, UnmarkCommand::make);
 
         return parser;
     }
