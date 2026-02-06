@@ -17,21 +17,6 @@ public class Airis {
             Hello! I'm Airis! Nice to meet you!
             What can I do for you?""";
 
-    private static final String byeMessage = """
-            See you next time!""";
-
-    private static final String doneMessage = """
-            I've mark this as done:
-                %s""";
-
-    private static final String notDoneMessage = """
-            I've mark this as not done yet:
-                %s""";
-
-    private static final String deleteMessage = """
-            I've deleted this task:
-                %s""";
-
     /**
      * This is the main function
      *
