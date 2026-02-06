@@ -1,6 +1,7 @@
 package airis.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A list of tasks.
@@ -53,5 +54,18 @@ public class TaskList {
      */
     public Task[] getAllTasks() {
         return list.toArray(new Task[0]);
+    }
+
+    /**
+     * Return the list of tasks that matches a keyword
+     *
+     * @param keyword The keyword to search for.
+     * @return The array of tasks.
+     */
+    public Task[] search(String keyword) {
+        List<Task> filtered = list.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .toList();
+        return filtered.toArray(new Task[0]);
     }
 }

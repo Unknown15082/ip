@@ -30,6 +30,7 @@ public class Parser {
         parser.register("delete", new String[]{}, DeleteCommand::make);
         parser.register("deadline", new String[]{"/by"}, DeadlineCommand::make);
         parser.register("event", new String[]{"/from", "/to"}, EventCommand::make);
+        parser.register("find", new String[]{}, FindCommand::make);
 
         return parser;
     }
