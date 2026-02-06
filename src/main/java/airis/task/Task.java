@@ -1,4 +1,6 @@
-package airis;
+package airis.task;
+
+import airis.AirisException;
 
 /**
  * The base class for all types of tasks.
@@ -7,10 +9,6 @@ public class Task {
     private final String description;
     private boolean isDone;
 
-    public Task(String description) {
-        this(description, false);
-    }
-
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -18,6 +16,7 @@ public class Task {
 
     /**
      * Load a task from its text representation.
+     *
      * @param data The text representation of a task.
      * @return The parsed task.
      * @throws AirisException if the task type is invalid.
@@ -33,6 +32,7 @@ public class Task {
 
     /**
      * Returns the description.
+     *
      * @return The description.
      */
     public String getDescription() {
@@ -50,6 +50,7 @@ public class Task {
 
     /**
      * Return the text representation to be saved.
+     *
      * @return The text representation.
      */
     public String toSaveData() {

@@ -1,4 +1,4 @@
-package airis;
+package airis.ui;
 
 /**
  * An implementation of UI, that prints to standard output.
@@ -9,6 +9,7 @@ public class TextUI implements UI {
 
     /**
      * Wrap the message in horizontal lines.
+     *
      * @param message The content of the message.
      * @return The wrapped message.
      */
@@ -19,6 +20,7 @@ public class TextUI implements UI {
 
     /**
      * Print the message to the standard output.
+     *
      * @param message The message to be displayed.
      */
     @Override

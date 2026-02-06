@@ -19,6 +19,7 @@ public class AirisException extends Exception {
 
     /**
      * Create a chatbot-specific error message for users
+     *
      * @return The error message
      */
     public String getAirisMessage() {

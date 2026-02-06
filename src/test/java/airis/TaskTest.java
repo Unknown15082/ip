@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import airis.task.Task;
+
 public class TaskTest {
     @Test
     public void loadTaskTest_Todo() throws AirisException {

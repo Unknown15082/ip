@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import airis.task.Task;
+
 /**
  * Store a list of tasks, and perform operations on them.
  */
@@ -21,6 +23,7 @@ public class Storage {
 
     /**
      * Add a task to the storage.
+     *
      * @param item The item to add.
      */
     public void add(Task item) {
@@ -29,6 +32,7 @@ public class Storage {
 
     /**
      * Retrieve a task from the storage.
+     *
      * @param idx The index to retrieve.
      * @return The item.
      */
@@ -38,6 +42,7 @@ public class Storage {
 
     /**
      * Remove a task from the storage.
+     *
      * @param idx The index of the item to be removed.
      * @return The deleted task.
      */
@@ -47,6 +52,7 @@ public class Storage {
 
     /**
      * Return a representation of all tasks inside the storage.
+     *
      * @return A multiline string, containing the number of elements and the elements themselves.
      */
     public String getAllAsString() {
@@ -62,6 +68,7 @@ public class Storage {
 
     /**
      * Save the storage to a local file.
+     *
      * @throws AirisException if there are I/O errors.
      */
     public void export() throws AirisException {
@@ -92,6 +99,7 @@ public class Storage {
 
     /**
      * Load the storage from a local file.
+     *
      * @throws AirisException if there is an I/O error.
      */
     public void load() throws AirisException {
@@ -121,6 +129,7 @@ public class Storage {
 
     /**
      * Search for all tasks with the keyword inside description.
+     *
      * @param keyword The keyword to search for.
      * @return An array containing all tasks that matches the keyword.
      */
