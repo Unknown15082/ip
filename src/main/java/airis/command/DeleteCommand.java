@@ -36,6 +36,11 @@ public class DeleteCommand implements Command {
         } catch (IndexOutOfBoundsException e) {
             return Response.fromErrorMessage("Index is out of bounds");
         }
+        try {
+            storage.export(tasklist);
+        } catch (AirisException e) {
+            return Response.fromException(e);
+        }
 
         return Response.fromMessage(String.format("I've deleted this task:\n\t%s", task));
     }

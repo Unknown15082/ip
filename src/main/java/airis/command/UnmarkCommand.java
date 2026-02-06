@@ -38,6 +38,11 @@ public class UnmarkCommand implements Command {
         }
 
         task.markAsNotDone();
+        try {
+            storage.export(tasklist);
+        } catch (AirisException e) {
+            return Response.fromException(e);
+        }
 
         return Response.fromMessage(String.format("I've mark this as not done yet:\n\t%s", task));
     }

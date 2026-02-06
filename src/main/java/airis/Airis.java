@@ -25,16 +25,16 @@ public class Airis {
      */
     public static void main(String[] args) {
         UI ui = new TextUI();
+        Parser parser = Parser.makeDefaultParser();
+        TaskList taskList = new TaskList();
 
         Storage storage = Storage.localFile("data.txt");
         try {
             storage.createIfNotExists();
+            storage.load(taskList);
         } catch (AirisException e) {
             ui.display(e.getAirisMessage());
         }
-
-        Parser parser = Parser.makeDefaultParser();
-        TaskList taskList = new TaskList();
 
         ui.display(helloMessage);
 

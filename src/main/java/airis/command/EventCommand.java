@@ -57,6 +57,11 @@ public class EventCommand implements Command {
     public Response process(Storage storage, TaskList tasklist) {
         Event task = new Event(this.description, this.startTime, this.endTime);
         tasklist.add(task);
+        try {
+            storage.export(tasklist);
+        } catch (AirisException e) {
+            return Response.fromException(e);
+        }
         return Response.fromMessage(
                 "I have added this task to your list:\n\t" + task
         );

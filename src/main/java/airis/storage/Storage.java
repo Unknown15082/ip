@@ -1,5 +1,6 @@
 package airis.storage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -44,6 +45,27 @@ public class Storage {
             Files.write(this.path, contents);
         } catch (IOException e) {
             throw new AirisException(e);
+        }
+    }
+
+    public void load(TaskList tasklist) throws AirisException {
+        BufferedReader reader;
+        try {
+            reader = Files.newBufferedReader(this.path);
+        } catch (IOException e) {
+            throw new AirisException(e);
+        }
+
+        while (true) {
+            String line;
+            try {
+                line = reader.readLine();
+            } catch (IOException e) {
+                throw new AirisException(e);
+            }
+            if (line == null) break;
+
+            tasklist.add(Task.loadTask(line));
         }
     }
 }

@@ -38,6 +38,11 @@ public class MarkCommand implements Command {
         }
 
         task.markAsDone();
+        try {
+            storage.export(tasklist);
+        } catch (AirisException e) {
+            return Response.fromException(e);
+        }
 
         return Response.fromMessage(String.format("I've mark this as done:\n\t%s", task));
     }

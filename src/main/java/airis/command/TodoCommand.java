@@ -26,6 +26,11 @@ public class TodoCommand implements Command {
     public Response process(Storage storage, TaskList tasklist) {
         Todo task = new Todo(this.description);
         tasklist.add(task);
+        try {
+            storage.export(tasklist);
+        } catch (AirisException e) {
+            return Response.fromException(e);
+        }
         return Response.fromMessage(
                 "I have added this task to your list:\n\t" + task
         );
