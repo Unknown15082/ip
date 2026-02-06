@@ -15,16 +15,16 @@ public class TaskTest {
 
     @Test
     public void loadTaskTest_Deadline() throws AirisException {
-        Task task = Task.loadTask("D|false|iP|Feb 06 2026 16:00");
+        Task task = Task.loadTask("D|false|iP|2026-02-06T16:00:00");
         assertEquals("[D][ ] iP (by: 2026-02-06 16:00:00)", task.toString());
     }
 
     @Test
     public void loadTaskTest_Event() throws AirisException {
         Task task = Task.loadTask(
-                "E|false|meeting|Feb 04 2026 18:00|Feb 04 2026 20:00");
+                "E|false|meeting|2026-02-04T18:00:00|2026-02-04T20:00:00");
         assertEquals(
-                "[E][ ] meeting (from: 2026-02-04 18:00:00; by: 2026-02-04 20:00:00)",
+                "[E][ ] meeting (from: 2026-02-04 18:00:00; to: 2026-02-04 20:00:00)",
                 task.toString()
         );
     }
