@@ -1,49 +1,52 @@
 package airis.task;
 
+import static airis.constants.TimeFormats.all;
+import static airis.constants.TimeFormats.iso;
+import static airis.constants.TimeFormats.standard;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Event task type.
  */
 public class Event extends Task {
-    private static final DateTimeFormatter humanFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-    private static final DateTimeFormatter isoFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
-    public Event(String description, String startTime, String endTime) {
-        super(description);
-        this.startTime = LocalDateTime.parse(startTime, humanFormat);
-        this.endTime = LocalDateTime.parse(endTime, humanFormat);
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
+        this(description, startTime, endTime, false);
     }
 
-    public Event(String description, boolean isDone, String startTime, String endTime) {
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime, boolean isDone) {
         super(description, isDone);
-        this.startTime = LocalDateTime.parse(startTime, humanFormat);
-        this.endTime = LocalDateTime.parse(endTime, humanFormat);
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public static Task loadTask(String data) {
         String[] parts = data.split("\\|");
         boolean isDone = Boolean.parseBoolean(parts[1]);
         String description = parts[2];
-        String startTime = parts[3];
-        String endTime = parts[4];
+        LocalDateTime startTime = LocalDateTime.parse(parts[3], all);
+        LocalDateTime endTime = LocalDateTime.parse(parts[4], all);
 
-        return new Event(description, isDone, startTime, endTime);
+        return new Event(description, startTime, endTime, isDone);
     }
 
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s; by: %s)",
                 super.toString(),
-                this.startTime.format(isoFormat), this.endTime.format(isoFormat));
+                this.startTime.format(standard),
+                this.endTime.format(standard));
     }
 
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", super.toSaveData(), this.startTime.format(humanFormat), this.endTime.format(humanFormat));
+        return String.format("E|%s|%s|%s",
+                super.toSaveData(),
+                this.startTime.format(iso),
+                this.endTime.format(iso));
     }
 }
 

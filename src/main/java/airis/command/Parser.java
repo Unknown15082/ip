@@ -28,6 +28,7 @@ public class Parser {
         parser.register("mark", new String[]{}, MarkCommand::make);
         parser.register("unmark", new String[]{}, UnmarkCommand::make);
         parser.register("delete", new String[]{}, DeleteCommand::make);
+        parser.register("deadline", new String[]{"/by"}, DeadlineCommand::make);
 
         return parser;
     }
@@ -81,6 +82,7 @@ public class Parser {
             if (flagSet.contains(token)) {
                 args.put(currentFlag, String.join(" ", currentData));
                 currentFlag = token;
+                currentData.clear();
                 continue;
             }
             currentData.add(token);
