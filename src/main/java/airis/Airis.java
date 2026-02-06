@@ -5,6 +5,7 @@ import java.util.Scanner;
 import airis.command.Command;
 import airis.command.Parser;
 import airis.command.Response;
+import airis.storage.Storage;
 import airis.task.TaskList;
 import airis.ui.TextUI;
 import airis.ui.UI;
@@ -23,8 +24,15 @@ public class Airis {
      * @param args arguments
      */
     public static void main(String[] args) {
-        Storage storage = new Storage();
         UI ui = new TextUI();
+
+        Storage storage = Storage.localFile("data.txt");
+        try {
+            storage.createIfNotExists();
+        } catch (AirisException e) {
+            ui.display(e.getAirisMessage());
+        }
+
         Parser parser = Parser.makeDefaultParser();
         TaskList taskList = new TaskList();
 
@@ -35,7 +43,7 @@ public class Airis {
             String line = stdin.nextLine();
             try {
                 Command cmd = parser.parse(line);
-                Response response = cmd.process(taskList);
+                Response response = cmd.process(storage, taskList);
                 response.process(ui);
             } catch (AirisException e) {
                 ui.display(e.getAirisMessage());

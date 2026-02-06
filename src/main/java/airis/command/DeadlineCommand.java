@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 import airis.AirisException;
+import airis.storage.Storage;
 import airis.task.Deadline;
 import airis.task.TaskList;
 
@@ -41,7 +42,7 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public Response process(TaskList tasklist) {
+    public Response process(Storage storage, TaskList tasklist) {
         Deadline task = new Deadline(this.description, this.due);
         tasklist.add(task);
         return Response.fromMessage(

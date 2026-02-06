@@ -3,6 +3,7 @@ package airis.command;
 import java.util.HashMap;
 
 import airis.AirisException;
+import airis.storage.Storage;
 import airis.task.Task;
 import airis.task.TaskList;
 
@@ -23,7 +24,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public Response process(TaskList tasklist) {
+    public Response process(Storage storage, TaskList tasklist) {
         Task[] tasks = tasklist.search(this.keyword);
 
         int count = tasks.length;

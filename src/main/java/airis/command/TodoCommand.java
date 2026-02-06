@@ -3,6 +3,7 @@ package airis.command;
 import java.util.HashMap;
 
 import airis.AirisException;
+import airis.storage.Storage;
 import airis.task.TaskList;
 import airis.task.Todo;
 
@@ -22,7 +23,7 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public Response process(TaskList tasklist) {
+    public Response process(Storage storage, TaskList tasklist) {
         Todo task = new Todo(this.description);
         tasklist.add(task);
         return Response.fromMessage(

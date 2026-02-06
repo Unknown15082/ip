@@ -2,6 +2,7 @@ package airis.command;
 
 import java.util.HashMap;
 
+import airis.storage.Storage;
 import airis.task.Task;
 import airis.task.TaskList;
 
@@ -14,7 +15,7 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public Response process(TaskList tasklist) {
+    public Response process(Storage storage, TaskList tasklist) {
         Task[] tasks = tasklist.getAllTasks();
 
         int count = tasks.length;

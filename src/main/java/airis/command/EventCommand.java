@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 import airis.AirisException;
+import airis.storage.Storage;
 import airis.task.Event;
 import airis.task.TaskList;
 
@@ -53,7 +54,7 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public Response process(TaskList tasklist) {
+    public Response process(Storage storage, TaskList tasklist) {
         Event task = new Event(this.description, this.startTime, this.endTime);
         tasklist.add(task);
         return Response.fromMessage(
