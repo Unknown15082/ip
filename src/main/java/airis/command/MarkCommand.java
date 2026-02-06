@@ -7,7 +7,7 @@ import airis.task.Task;
 import airis.task.TaskList;
 
 public class MarkCommand implements Command {
-    private int index;
+    private final int index;
 
     private MarkCommand(int index) {
         this.index = index;
