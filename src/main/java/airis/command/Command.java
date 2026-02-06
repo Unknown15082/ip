@@ -6,5 +6,5 @@ import airis.task.TaskList;
  * The interface for all types of commands.
  */
 public interface Command {
-    public Response process(TaskList tasklist);
+    Response process(TaskList tasklist);
 }

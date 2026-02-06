@@ -6,7 +6,8 @@ import airis.task.Task;
 import airis.task.TaskList;
 
 public class ListCommand implements Command {
-    private ListCommand() {}
+    private ListCommand() {
+    }
 
     public static Command make(HashMap<String, String> args) {
         return new ListCommand();
@@ -23,7 +24,7 @@ public class ListCommand implements Command {
             StringBuilder sb = new StringBuilder();
             sb.append(String.format("There are %d tasks stored:", count));
             for (int i = 0; i < count; i++) {
-                sb.append(String.format("\n%d: %s", i+1, tasks[i]));
+                sb.append(String.format("\n%d: %s", i + 1, tasks[i]));
             }
             return Response.fromMessage(sb.toString());
         }

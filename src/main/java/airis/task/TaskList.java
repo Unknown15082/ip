@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Add an item into the list
+     *
      * @param item The item to be added.
      */
     public void add(Task item) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Remove an item from the list, using its index.
+     *
      * @param index The index of the item to be removed.
      * @return The removed task.
      * @throws IndexOutOfBoundsException if index is invalid.
@@ -35,6 +37,7 @@ public class TaskList {
 
     /**
      * Retrieve an item from the list, using its index.
+     *
      * @param index The index of the item to be retrieved.
      * @return The retrieved task.
      * @throws IndexOutOfBoundsException if index is invalid.
@@ -45,6 +48,7 @@ public class TaskList {
 
     /**
      * Return an array of all the stored tasks.
+     *
      * @return The array of tasks.
      */
     public Task[] getAllTasks() {
