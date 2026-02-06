@@ -35,7 +35,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s; by: %s)",
+        return String.format("[E]%s (from: %s; to: %s)",
                 super.toString(),
                 this.startTime.format(standard),
                 this.endTime.format(standard));
