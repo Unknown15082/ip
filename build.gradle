@@ -47,7 +47,7 @@ checkstyle {
 }
 
 application {
-    mainClass.set("Launcher")
+    mainClass.set("airis.ui.gui.Launcher")
 }
 
 shadowJar {
