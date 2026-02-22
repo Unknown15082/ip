@@ -50,4 +50,14 @@ public class Airis {
             }
         }
     }
+
+    /**
+     * Dummy method to test JavaFX.
+     *
+     * @param message Message to be echoed.
+     * @return The echoed message.
+     */
+    public String echo(String message) {
+        return "Echo: " + message;
+    }
 }

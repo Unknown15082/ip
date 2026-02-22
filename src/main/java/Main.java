@@ -1,3 +1,4 @@
+import airis.Airis;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class Main extends Application {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Airis airis = new Airis();
 
     @Override
     public void start(Stage stage) {
@@ -32,16 +34,12 @@ public class Main extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        DialogBox dialogBox = new DialogBox("Hello!", userImage);
-        dialogContainer.getChildren().addAll(dialogBox);
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
-        stage.show();
 
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -70,5 +68,27 @@ public class Main extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        stage.show();
+    }
+
+    private void handleUserInput() {
+        String userText = userInput.getText();
+        String responseText = airis.echo(userText);
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, userImage),
+                new DialogBox(responseText, dukeImage)
+        );
+        userInput.clear();
     }
 }
