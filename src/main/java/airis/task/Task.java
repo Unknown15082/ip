@@ -9,6 +9,12 @@ public class Task {
     private final String description;
     private boolean isDone;
 
+    /**
+     * Construct a task.
+     *
+     * @param description Description.
+     * @param isDone      Whether a task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -23,10 +29,10 @@ public class Task {
      */
     public static Task loadTask(String data) throws AirisException {
         return switch (data.charAt(0)) {
-            case 'T' -> Todo.loadTask(data);
-            case 'D' -> Deadline.loadTask(data);
-            case 'E' -> Event.loadTask(data);
-            default -> throw new AirisException("Invalid task type");
+        case 'T' -> Todo.loadTask(data);
+        case 'D' -> Deadline.loadTask(data);
+        case 'E' -> Event.loadTask(data);
+        default -> throw new AirisException("Invalid task type");
         };
     }
 

@@ -1,8 +1,8 @@
 package airis.task;
 
-import static airis.constants.TimeFormats.all;
-import static airis.constants.TimeFormats.iso;
-import static airis.constants.TimeFormats.standard;
+import static airis.constants.TimeFormats.ALL;
+import static airis.constants.TimeFormats.ISO;
+import static airis.constants.TimeFormats.STANDARD;
 
 import java.time.LocalDateTime;
 
@@ -16,16 +16,27 @@ public class Deadline extends Task {
         this(description, due, false);
     }
 
+    /**
+     * Full constructor with custom status state.
+     * @param description Description.
+     * @param due Due date.
+     * @param isDone Whether the task was done.
+     */
     public Deadline(String description, LocalDateTime due, boolean isDone) {
         super(description, isDone);
         this.due = due;
     }
 
+    /**
+     * Load the task from information string.
+     * @param data Information string.
+     * @return The created task.
+     */
     public static Task loadTask(String data) {
         String[] parts = data.split("\\|");
         boolean isDone = Boolean.parseBoolean(parts[1]);
         String description = parts[2];
-        LocalDateTime due = LocalDateTime.parse(parts[3], all);
+        LocalDateTime due = LocalDateTime.parse(parts[3], ALL);
 
         return new Deadline(description, due, isDone);
     }
@@ -33,12 +44,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)",
-                super.toString(), this.due.format(standard));
+                super.toString(), this.due.format(STANDARD));
     }
 
     @Override
     public String toSaveData() {
         return String.format("D|%s|%s",
-                super.toSaveData(), this.due.format(iso));
+                super.toSaveData(), this.due.format(ISO));
     }
 }

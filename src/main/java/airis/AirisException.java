@@ -23,7 +23,7 @@ public class AirisException extends Exception {
      * @return The error message
      */
     public String getAirisMessage() {
-        return String.format("Oh no, an error has occurred!" +
-                "\n\t%s", super.getMessage());
+        return String.format("Oh no, an error has occurred!"
+                + "\n\t%s", super.getMessage());
     }
 }

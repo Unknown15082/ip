@@ -7,6 +7,9 @@ import airis.storage.Storage;
 import airis.task.Task;
 import airis.task.TaskList;
 
+/**
+ * Command for marking a task as done.
+ */
 public class MarkCommand implements Command {
     private final int index;
 
@@ -14,6 +17,12 @@ public class MarkCommand implements Command {
         this.index = index;
     }
 
+    /**
+     * Create a command from argument set.
+     * @param args Argument set.
+     * @return The created command.
+     * @throws AirisException if field is missing or incorrect.
+     */
     public static Command make(HashMap<String, String> args) throws AirisException {
         String indexStr = args.get("main");
         if (indexStr == null || indexStr.isEmpty()) {

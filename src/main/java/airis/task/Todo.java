@@ -12,6 +12,11 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Create a task from information string.
+     * @param data Information string.
+     * @return The created task.
+     */
     public static Task loadTask(String data) {
         String[] parts = data.split("\\|");
         boolean isDone = Boolean.parseBoolean(parts[1]);

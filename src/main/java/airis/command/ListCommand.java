@@ -6,6 +6,9 @@ import airis.storage.Storage;
 import airis.task.Task;
 import airis.task.TaskList;
 
+/**
+ * Command for listing all tasks.
+ */
 public class ListCommand implements Command {
     private ListCommand() {
     }

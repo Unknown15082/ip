@@ -14,11 +14,18 @@ public class Parser {
     private final HashMap<String, String[]> flagsList;
     private final HashMap<String, CommandConstructor> constructorList;
 
+    /**
+     * Construct an empty parser.
+     */
     public Parser() {
         this.flagsList = new HashMap<>();
         this.constructorList = new HashMap<>();
     }
 
+    /**
+     * Construct a default parser with all standard commands.
+     * @return The default parser.
+     */
     public static Parser makeDefaultParser() {
         Parser parser = new Parser();
 
@@ -46,6 +53,12 @@ public class Parser {
         return Arrays.stream(tokens).filter(token -> !token.isEmpty()).toArray(String[]::new);
     }
 
+    /**
+     * Add a new command to the parser.
+     * @param name The name of the command.
+     * @param flags The available flags for the command.
+     * @param constructor The constructor to create a new command.
+     */
     public void register(String name, String[] flags, CommandConstructor constructor) {
         this.flagsList.put(name, flags);
         this.constructorList.put(name, constructor);

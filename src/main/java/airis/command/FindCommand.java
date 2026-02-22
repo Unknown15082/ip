@@ -7,6 +7,9 @@ import airis.storage.Storage;
 import airis.task.Task;
 import airis.task.TaskList;
 
+/**
+ * Command for searching a task.
+ */
 public class FindCommand implements Command {
     private final String keyword;
 
@@ -14,6 +17,12 @@ public class FindCommand implements Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Create a command from argument set.
+     * @param args Argument set.
+     * @return The created command.
+     * @throws AirisException if field is missing or incorrect.
+     */
     public static Command make(HashMap<String, String> args) throws AirisException {
         String keyword = args.get("main");
         if (keyword == null || keyword.isEmpty()) {

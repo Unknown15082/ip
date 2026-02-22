@@ -1,6 +1,6 @@
 package airis.command;
 
-import static airis.constants.TimeFormats.all;
+import static airis.constants.TimeFormats.ALL;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -11,6 +11,9 @@ import airis.storage.Storage;
 import airis.task.Event;
 import airis.task.TaskList;
 
+/**
+ * Command for creating an event.
+ */
 public class EventCommand implements Command {
     private final String description;
     private final LocalDateTime startTime;
@@ -22,6 +25,13 @@ public class EventCommand implements Command {
         this.endTime = endTime;
     }
 
+    /**
+     * Create a command from argument set.
+     *
+     * @param args Argument set.
+     * @return The created command.
+     * @throws AirisException if field is missing or incorrect.
+     */
     public static Command make(HashMap<String, String> args) throws AirisException {
         String description = args.get("main");
         if (description == null || description.isEmpty()) {
@@ -38,14 +48,15 @@ public class EventCommand implements Command {
             throw new AirisException("Due date cannot be empty");
         }
 
-        LocalDateTime startTime, endTime;
+        LocalDateTime startTime;
+        LocalDateTime endTime;
         try {
-            startTime = LocalDateTime.parse(startStr, all);
+            startTime = LocalDateTime.parse(startStr, ALL);
         } catch (DateTimeParseException e) {
             throw new AirisException("Cannot parse start date");
         }
         try {
-            endTime = LocalDateTime.parse(endStr, all);
+            endTime = LocalDateTime.parse(endStr, ALL);
         } catch (DateTimeParseException e) {
             throw new AirisException("Cannot parse end date");
         }
