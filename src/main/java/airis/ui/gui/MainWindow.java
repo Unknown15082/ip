@@ -1,3 +1,5 @@
+package airis.ui.gui;
+
 import airis.Airis;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

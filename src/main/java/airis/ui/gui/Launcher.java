@@ -1,3 +1,5 @@
+package airis.ui.gui;
+
 import javafx.application.Application;
 
 /**

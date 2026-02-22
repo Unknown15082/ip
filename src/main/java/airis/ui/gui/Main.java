@@ -1,3 +1,5 @@
+package airis.ui.gui;
+
 import java.io.IOException;
 
 import airis.Airis;
