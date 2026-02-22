@@ -86,8 +86,8 @@ public class Main extends Application {
         String userText = userInput.getText();
         String responseText = airis.echo(userText);
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, userImage),
-                new DialogBox(responseText, dukeImage)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getAirisDialog(responseText, dukeImage)
         );
         userInput.clear();
     }
