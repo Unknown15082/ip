@@ -1,6 +1,6 @@
 package airis.command;
 
-import static airis.constants.TimeFormats.all;
+import static airis.constants.TimeFormats.ALL;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -11,6 +11,9 @@ import airis.storage.Storage;
 import airis.task.Deadline;
 import airis.task.TaskList;
 
+/**
+ * Command for creating a deadline-type task.
+ */
 public class DeadlineCommand implements Command {
     private final String description;
     private final LocalDateTime due;
@@ -20,6 +23,12 @@ public class DeadlineCommand implements Command {
         this.due = due;
     }
 
+    /**
+     * Create a new command from argument set.
+     * @param args Argument set.
+     * @return The created command.
+     * @throws AirisException if a field is missing or incorrect.
+     */
     public static Command make(HashMap<String, String> args) throws AirisException {
         String description = args.get("main");
         if (description == null || description.isEmpty()) {
@@ -33,7 +42,7 @@ public class DeadlineCommand implements Command {
 
         LocalDateTime due;
         try {
-            due = LocalDateTime.parse(dueStr, all);
+            due = LocalDateTime.parse(dueStr, ALL);
         } catch (DateTimeParseException e) {
             throw new AirisException("Cannot parse date");
         }

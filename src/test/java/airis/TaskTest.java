@@ -1,26 +1,26 @@
 package airis;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import airis.task.Task;
 
 public class TaskTest {
     @Test
-    public void loadTaskTest_Todo() throws AirisException {
+    public void loadTaskTest_todo() throws AirisException {
         Task task = Task.loadTask("T|false|sleep");
         assertEquals("[T][ ] sleep", task.toString());
     }
 
     @Test
-    public void loadTaskTest_Deadline() throws AirisException {
+    public void loadTaskTest_deadline() throws AirisException {
         Task task = Task.loadTask("D|false|iP|2026-02-06T16:00:00");
         assertEquals("[D][ ] iP (by: 2026-02-06 16:00:00)", task.toString());
     }
 
     @Test
-    public void loadTaskTest_Event() throws AirisException {
+    public void loadTaskTest_event() throws AirisException {
         Task task = Task.loadTask(
                 "E|false|meeting|2026-02-04T18:00:00|2026-02-04T20:00:00");
         assertEquals(

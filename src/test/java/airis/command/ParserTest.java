@@ -1,11 +1,10 @@
 package airis.command;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import airis.AirisException;
 
@@ -31,13 +30,13 @@ public class ParserTest {
 
     @Test
     public void testParse_empty() {
-        assertThrows(AirisException.class,
-                () -> parser.parse(""));
+        assertThrows(AirisException.class, ()
+                -> parser.parse(""));
     }
 
     @Test
     public void testParse_invalidCommand() {
-        assertThrows(AirisException.class,
-                () -> parser.parse("invalid command"));
+        assertThrows(AirisException.class, ()
+                -> parser.parse("invalid command"));
     }
 }

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import airis.storage.Storage;
 import airis.task.TaskList;
 
+/**
+ * Command class for quitting the program.
+ */
 public class ByeCommand implements Command {
     private ByeCommand() {
     }
