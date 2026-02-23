@@ -10,10 +10,10 @@
             prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="airis.ui.gui.MainWindow" style="-fx-background-color: #1e1e2e;">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="641.0"
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="635.0"
                    AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" promptText="Type a message..."
                    style="-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-prompt-text-fill: #6c7086; -fx-background-radius: 24; -fx-border-color: transparent; -fx-font-size: 14;"/>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
+        <Button fx:id="sendButton" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
                 prefHeight="41.0" prefWidth="141.0" text="Send" AnchorPane.bottomAnchor="8.0"
                 AnchorPane.rightAnchor="8.0"
                 style="-fx-background-color: #cba6f7; -fx-text-fill: #1e1e2e; -fx-background-radius: 24; -fx-font-weight: bold; -fx-font-size: 14; -fx-cursor: hand;"/>
