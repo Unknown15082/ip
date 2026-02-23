@@ -7,17 +7,22 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
             prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="airis.ui.gui.MainWindow">
+            fx:controller="airis.ui.gui.MainWindow" style="-fx-background-color: #1e1e2e;">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="47.0" prefWidth="647.0"
-                   AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="151.0"/>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="641.0"
+                   AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" promptText="Type a message..."
+                   style="-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-prompt-text-fill: #6c7086; -fx-background-radius: 24; -fx-border-color: transparent; -fx-font-size: 14;"/>
         <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
-                prefHeight="47.0" prefWidth="147.0" text="Send" AnchorPane.bottomAnchor="2.0"
-                AnchorPane.leftAnchor="651.0" AnchorPane.rightAnchor="2.0"/>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="747.0" prefWidth="796.0" vvalue="1.0"
-                    AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                prefHeight="41.0" prefWidth="141.0" text="Send" AnchorPane.bottomAnchor="8.0"
+                AnchorPane.rightAnchor="8.0"
+                style="-fx-background-color: #cba6f7; -fx-text-fill: #1e1e2e; -fx-background-radius: 24; -fx-font-weight: bold; -fx-font-size: 14; -fx-cursor: hand;"/>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" vvalue="1.0" fitToWidth="true"
+                    AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0"
+                    AnchorPane.bottomAnchor="67.0"
+                    style="-fx-background: #1e1e2e; -fx-background-color: #1e1e2e; -fx-border-color: transparent;">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="747.0" prefWidth="780.0"/>
+                <VBox fx:id="dialogContainer" prefWidth="780.0"
+                      style="-fx-background-color: #1e1e2e; -fx-padding: 10; -fx-spacing: 6;"/>
             </content>
         </ScrollPane>
     </children>
