@@ -11,7 +11,7 @@
             fx:controller="airis.ui.gui.MainWindow" style="-fx-background-color: #1e1e2e;">
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="635.0"
-                   AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" promptText="Type a message..."
+                   AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="157.0" promptText="Type a message..."
                    style="-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-prompt-text-fill: #6c7086; -fx-background-radius: 24; -fx-border-color: transparent; -fx-font-size: 14;"/>
         <Button fx:id="sendButton" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
                 prefHeight="41.0" prefWidth="141.0" text="Send" AnchorPane.bottomAnchor="8.0"
