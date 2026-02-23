@@ -1,8 +1,7 @@
 # Airis User Guide
 
-// Update the title above to match the actual product name
-
 // Product screenshot goes here
+![Screenshot of the UI for Airis](/docs/Ui.png)
 
 // Product intro goes here
 
