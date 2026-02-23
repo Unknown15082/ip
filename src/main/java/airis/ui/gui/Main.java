@@ -2,8 +2,6 @@ package airis.ui.gui;
 
 import java.io.IOException;
 
-import airis.Airis;
-import airis.ui.UI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

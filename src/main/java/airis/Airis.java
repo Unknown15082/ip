@@ -25,12 +25,19 @@ public class Airis {
         this(new TextUI());
     }
 
+    /**
+     * Construct an Airis instance with a specific UI.
+     * @param ui
+     */
     public Airis(UI ui) {
         this.ui = ui;
         initialize();
         ui.display(helloMessage);
     }
 
+    /**
+     * Initialize the chatbot.
+     */
     public void initialize() {
         this.parser = Parser.makeDefaultParser();
         this.taskList = new TaskList();
@@ -44,6 +51,10 @@ public class Airis {
         }
     }
 
+    /**
+     * Process the command provided by the text.
+     * @param line The command text.
+     */
     public void processCommand(String line) {
         try {
             Command cmd = this.parser.parse(line);
