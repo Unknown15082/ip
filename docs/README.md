@@ -116,6 +116,7 @@ list
 
 **Output:**
 ```
+There are 3 tasks stored:
 1. [T][ ] Buy groceries
 2. [D][ ] Submit assignment (by: 2025-04-01 23:59:00)
 3. [E][ ] Team meeting (from: 2025-04-01 10:00:00; to: 2025-04-01 11:00:00)
@@ -155,6 +156,12 @@ Marks a previously completed task as not done.
 **Example:**
 ```
 unmark 1
+```
+
+**Output:**
+```
+I've mark this as not done yet:
+    [T][ ] Buy groceries
 ```
 
 ---
