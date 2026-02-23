@@ -39,7 +39,7 @@ public class Airis {
      * Initialize the chatbot.
      */
     public void initialize() {
-        this.parser = Parser.makeDefaultParser();
+        this.parser = Parser.makeFullParser();
         this.taskList = new TaskList();
 
         this.storage = Storage.localFile("data.txt");
