@@ -2,7 +2,7 @@
 
 # Airis User Guide
 
-![Screenshot of the UI for Airis](/docs/Ui.png)
+![Screenshot of the UI for Airis](Ui.png)
 
 Airis is a personal task manager chatbot that helps you keep track of todos, deadlines, and events. It stores your tasks locally and remembers them between sessions.
 
