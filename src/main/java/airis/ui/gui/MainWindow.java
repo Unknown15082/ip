@@ -1,6 +1,7 @@
 package airis.ui.gui;
 
 import airis.Airis;
+import airis.ui.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,7 +13,7 @@ import javafx.scene.layout.VBox;
 /**
  * Main window controller.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends AnchorPane implements UI {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,25 +26,30 @@ public class MainWindow extends AnchorPane {
     private Airis airis;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/swarm.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/heart.png"));
+    private Image airisImage = new Image(this.getClass().getResourceAsStream("/images/heart.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setAiris(Airis airis) {
-        this.airis = airis;
+    public void setAiris() {
+        this.airis = new Airis(this);
     }
 
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
-        String responseText = airis.echo(userText);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getAirisDialog(responseText, dukeImage)
-        );
         userInput.clear();
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(userText, userImage)
+        );
+
+        airis.processCommand(userText);
+    }
+
+    @Override
+    public void display(String message) {
+        dialogContainer.getChildren().add(DialogBox.getAirisDialog(message, airisImage));
     }
 }
