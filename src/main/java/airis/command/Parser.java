@@ -24,6 +24,7 @@ public class Parser {
 
     /**
      * Construct a default parser with all standard commands.
+     *
      * @return The default parser.
      */
     public static Parser makeDefaultParser() {
@@ -43,6 +44,27 @@ public class Parser {
     }
 
     /**
+     * Construct a full parser with all available aliases.
+     *
+     * @return The full parser.
+     */
+    public static Parser makeFullParser() {
+        Parser parser = Parser.makeDefaultParser();
+
+        parser.register("q", new String[]{}, ByeCommand::make);
+        parser.register("ls", new String[]{}, ListCommand::make);
+        parser.register("t", new String[]{}, TodoCommand::make);
+        parser.register("d", new String[]{"/by"}, DeadlineCommand::make);
+        parser.register("e", new String[]{"/from", "/to"}, EventCommand::make);
+        parser.register("del", new String[]{}, DeleteCommand::make);
+        parser.register("f", new String[]{}, FindCommand::make);
+        parser.register("x", new String[]{}, MarkCommand::make);
+        parser.register("ux", new String[]{}, UnmarkCommand::make);
+
+        return parser;
+    }
+
+    /**
      * Split the information text into tokens, separated by whitespaces
      *
      * @param text The information text
@@ -55,8 +77,9 @@ public class Parser {
 
     /**
      * Add a new command to the parser.
-     * @param name The name of the command.
-     * @param flags The available flags for the command.
+     *
+     * @param name        The name of the command.
+     * @param flags       The available flags for the command.
      * @param constructor The constructor to create a new command.
      */
     public void register(String name, String[] flags, CommandConstructor constructor) {
