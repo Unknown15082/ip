@@ -62,6 +62,9 @@ public class Storage {
             contents.add(item.toSaveData());
         }
 
+        // Assert path exists before writing
+        assert Files.exists(this.path);
+
         try {
             Files.write(this.path, contents);
         } catch (IOException e) {
